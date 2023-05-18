@@ -1,6 +1,6 @@
-package com.example.helloworld.config;
+package com.example.webmusic.config;
 
-import com.example.helloworld.Intercepter.LoginInterceptor;
+import com.example.webmusic.Intercepter.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

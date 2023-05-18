@@ -1,4 +1,4 @@
-package com.example.helloworld.config;
+package com.example.webmusic.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

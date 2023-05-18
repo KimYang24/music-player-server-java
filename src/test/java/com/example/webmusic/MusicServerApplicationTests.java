@@ -1,10 +1,10 @@
-package com.example.helloworld;
+package com.example.webmusic;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HelloworldApplicationTests {
+class MusicServerApplicationTests {
 
     @Test
     void contextLoads() {

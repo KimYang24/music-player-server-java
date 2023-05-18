@@ -1,4 +1,4 @@
-package com.example.helloworld;
+package com.example.webmusic;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -6,11 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-@MapperScan("com.example.helloworld.mapper")
-public class HelloworldApplication {
+@MapperScan("com.example.webmusic.mapper")
+public class MusicServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HelloworldApplication.class, args);
+        SpringApplication.run(MusicServerApplication.class, args);
     }
 
 }

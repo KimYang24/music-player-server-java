@@ -1,7 +1,6 @@
-package com.example.helloworld.Intercepter;
+package com.example.webmusic.Intercepter;
 
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

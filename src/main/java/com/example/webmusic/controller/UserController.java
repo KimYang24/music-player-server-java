@@ -1,10 +1,10 @@
-package com.example.helloworld.controller;
+package com.example.webmusic.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.helloworld.entity.User;
-import com.example.helloworld.mapper.UserMapper;
+import com.example.webmusic.entity.User;
+import com.example.webmusic.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 public class UserController {
+
 
 
     @PostMapping(value = "/upload")
