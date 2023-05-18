@@ -43,7 +43,7 @@ public class UserController {
     //条件查询
     @GetMapping("/user/find")
     public String queryById(){
-        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("name","lpt");
         List<User> ans =userMapper.selectList(queryWrapper);
         System.out.println(ans);
@@ -53,7 +53,7 @@ public class UserController {
     //分页查询
     @GetMapping("/user/findByPage")
     public IPage<User> findByPage(){
-        Page<User> page = new Page<User>(0,2);
+        Page<User> page = new Page<>(0,2);
         IPage<User> iPage = userMapper.selectPage(page,null);
         return iPage;
     }
