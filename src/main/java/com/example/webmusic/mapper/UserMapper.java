@@ -1,7 +1,7 @@
 package com.example.webmusic.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.webmusic.entity.User;
+import com.example.webmusic.models.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

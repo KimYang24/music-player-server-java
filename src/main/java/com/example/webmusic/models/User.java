@@ -1,4 +1,4 @@
-package com.example.webmusic.entity;
+package com.example.webmusic.models;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
