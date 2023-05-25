@@ -11,7 +11,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-
+//swagger配置类
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
@@ -21,7 +21,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(buildApiInfo())
                 .select()
-                // 要扫描的API(Controller)基础包
+                // 要扫描的API(Controller)基础包，选择api的位置
                 .apis(RequestHandlerSelectors.basePackage("com"))
                 .paths(PathSelectors.any())
                 .build();
