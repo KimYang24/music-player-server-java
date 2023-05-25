@@ -57,6 +57,17 @@
             <version>1.2.8</version>
         </dependency>
 
+        <!--导入Lombok依赖-->
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <!--这里是设置作用域-->
+            <!--注释作用域，表明我想让它为全局使用-->
+            <!--<scope>provided</scope>-->
+        </dependency>
+
 
     </dependencies>
 
