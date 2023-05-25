@@ -1,4 +1,4 @@
-package com.example.webmusic.Intercepter;
+package com.example.webmusic.router.Intercepter;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 

@@ -1,6 +1,6 @@
 package com.example.webmusic.config;
 
-import com.example.webmusic.Intercepter.LoginInterceptor;
+import com.example.webmusic.router.Intercepter.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
