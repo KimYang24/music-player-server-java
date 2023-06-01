@@ -2,16 +2,25 @@ package com.example.webmusic.config;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
 
 public class AliyunOssConfig {
     // Endpoint:广州
-    static String endpoint = "https://oss-cn-guangzhou.aliyuncs.com";
     // 阿里云账号AccessKey
-    static String accessKeyId = "LTAI5tEZPqYCvUwvAcYvUy7W";
-    static String accessKeySecret = "pFVyY9pLBITSsCmADv4EMidrjxuNcl";
-
     // 创建OSSClient实例。
-    static public OSS createOssClient(){
-        return new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+    static public OSS createOssClient() throws IOException {
+        File file = new File("C:/Users/37359/Desktop/key.json");
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String,Object> map = objectMapper.readValue(file,new TypeReference<Map<String,Object>>(){});
+        return new OSSClientBuilder().build(
+                (String) map.get("endpoint"),
+                (String) map.get("accessKeyId"),
+                (String) map.get("accessKeySecret"));
     }
+
 }
