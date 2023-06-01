@@ -2,7 +2,6 @@ package com.example.webmusic.controller.user;
 
 import com.example.webmusic.models.user.AdminUser;
 import lombok.Data;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
