@@ -22,7 +22,7 @@ public class SwaggerConfig {
                 .apiInfo(buildApiInfo())
                 .select()
                 // 要扫描的API(Controller)基础包，选择api的位置
-                .apis(RequestHandlerSelectors.basePackage("com"))
+                .apis(RequestHandlerSelectors.basePackage("com/example/webmusic/controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

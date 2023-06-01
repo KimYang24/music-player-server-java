@@ -1,87 +1,37 @@
 package com.example.webmusic.controller.user;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.webmusic.models.user.User;
-import com.example.webmusic.mapper.user.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import com.example.webmusic.service.UserService;
 
-import java.util.List;
+import com.example.webmusic.controller.user.in.InApiRegister;
+import com.example.webmusic.controller.user.out.OutApiLogin;
+import com.example.webmusic.controller.user.out.OutApiRegister;
+import com.example.webmusic.service.user.UserService;
+import com.example.webmusic.controller.user.in.InApiLogin;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
-
-    private UserService uss;
-
-
-    @PostMapping(value = "/upload")
-    public void uploadUser(String nickname, MultipartFile file){
-        System.out.println("nickname = " + nickname);
-        System.out.println("file.getName() = " + file.getName());
-        System.out.println("file.getOriginalFilename() = " + file.getOriginalFilename());
-    }
-
-    //声明这个UserMapper对象，给mybatis用的
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
-    @GetMapping("/user")
-    public List<User> query(){
-        List<User> ans = userMapper.selectList(null);
-        System.out.println(ans);
-        return ans;
+    //用户注册
+    @PostMapping(value = "/register")
+    public OutApiRegister userRegister(@RequestBody InApiRegister inApiRegister){
+        OutApiRegister outApiRegister = new OutApiRegister();
+        userService.userRegister(inApiRegister,outApiRegister);
+        return outApiRegister;
     }
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello";
+    //用户登录
+    @GetMapping(value="/login/cellphone")
+    public OutApiLogin userLogin(@RequestParam(value = "phone") String phone,@RequestParam(value = "password")String password){
+        InApiLogin inApiLogin = InApiLogin.builder()
+                .phone(phone)
+                .password(password)
+                .build();
+        OutApiLogin outApiLogin = new OutApiLogin();
+        userService.userLogin(inApiLogin,outApiLogin);
+        return outApiLogin;
     }
-
-    //条件查询
-    @GetMapping("/user/find")
-    public String queryById(){
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("name","lpt");
-        List<User> ans =userMapper.selectList(queryWrapper);
-        System.out.println(ans);
-        return "success";
-    }
-
-    //分页查询
-    @GetMapping("/user/findByPage")
-    public IPage<User> findByPage(){
-        Page<User> page = new Page<>(0,2);
-        IPage<User> iPage = userMapper.selectPage(page,null);
-        return iPage;
-    }
-
-    @PostMapping("/User/login")
-    public String UserLoginHandler(String username, String password){
-        if (uss.UserLogin(username, password)){
-            return "successed";
-        }
-        else{
-            return "failed";
-        }
-    }
-
-    @PostMapping("/User/addInfo")
-    public String UserRegisterHandler(User user){
-        if(uss.UserRegister(user)){
-            return "successed";
-        }
-        else{
-            return "failed";
-        }
-    }
-
-    @GetMapping("/User/theInfo")
-    public String User
 
 }
