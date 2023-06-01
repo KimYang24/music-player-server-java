@@ -1,29 +1,32 @@
 package com.example.webmusic.models.song;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Builder;
 import lombok.Data;
 
-/**
- * 对应数据库的song表格
- */
+
 @Data
+@Builder
 @TableName("song")
 public class Song {
     //主键
-    @TableId
-    private long songId;
+    //将主键字段的值设置为 null 或默认值，数据库会自动生成自增的 ID，并将其赋值给实体对象的主键字段。
+    //如果您手动设置了主键字段的值（非 null），则数据库会使用您提供的值插入到主键字段，并不会自动生成自增的 ID。
+    @TableId(type = IdType.AUTO)
+    private long song_id;
     /**
      * 歌曲专辑名
      */
     private String album;
-    private Long albumId;
+    private Long album_id;
     /**
      * 歌手名称
      */
     private String artist;
-    private Long artistId;
+    private Long artist_id;
     /**
      * 歌曲秒数时长
      */
@@ -31,7 +34,7 @@ public class Song {
     /**
      * 歌词url
      */
-    private String lyricUrl;
+    private String lyric_url;
     /**
      * 评论数
      */
@@ -43,7 +46,7 @@ public class Song {
     /**
      * 图片url，根据专辑id
      */
-    private String picUrl;
+    private String pic_url;
     /**
      * 歌曲播放次数
      */
@@ -51,13 +54,13 @@ public class Song {
     /**
      * 发行时间
      */
-    private String publishTime;
+    private String publish_time;
     /**
      * 歌曲类别
      */
     private String type;
     /**
-     * 歌曲url
+     * 歌曲
      */
     private String url;
 }

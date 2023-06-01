@@ -1,9 +1,9 @@
 package com.example.webmusic.models.user;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Builder;
 import lombok.Data;
 
 /*使用Lombok注解，@Date,自动生成
@@ -14,18 +14,24 @@ import lombok.Data;
 @RequiredArgsConstructor
 方法*/
 
+/**
+ * user
+ */
+@Builder
 @Data
-//注释表名
 @TableName("user")
 public class User {
-    //注释主键名，type属性指定主键类型，auto指定数据库ID自增
     @TableId(type=IdType.AUTO)
-    String id;
-    //如果名称不一致
-    //@TableField(value="name")
-    String username;
-    String password;
+    private long user_id;
 
-    //也可以多表查询
-
+    private String age;
+    private String created_at;
+    private String updated_at;
+    private String deleted_at;
+    private String email;
+    private String gender;
+    private String nickname;
+    private String password;
+    private String phone;
+    private String username;
 }
