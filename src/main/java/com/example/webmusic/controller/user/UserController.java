@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import com.example.webmusic.service.UserService;
 
 import java.util.List;
 
 @RestController
 public class UserController {
 
+    private UserService uss;
 
 
     @PostMapping(value = "/upload")
@@ -58,4 +60,28 @@ public class UserController {
         IPage<User> iPage = userMapper.selectPage(page,null);
         return iPage;
     }
+
+    @PostMapping("/User/login")
+    public String UserLoginHandler(String username, String password){
+        if (uss.UserLogin(username, password)){
+            return "successed";
+        }
+        else{
+            return "failed";
+        }
+    }
+
+    @PostMapping("/User/addInfo")
+    public String UserRegisterHandler(User user){
+        if(uss.UserRegister(user)){
+            return "successed";
+        }
+        else{
+            return "failed";
+        }
+    }
+
+    @GetMapping("/User/theInfo")
+    public String User
+
 }
