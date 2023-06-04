@@ -11,7 +11,5 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MusicServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(MusicServerApplication.class, args);
-
     }
-
 }

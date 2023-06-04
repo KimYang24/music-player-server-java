@@ -3,15 +3,16 @@ package com.example.webmusic.service.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.webmusic.controller.user.in.InApiLogin;
-import com.example.webmusic.controller.user.in.InApiRegister;
-import com.example.webmusic.controller.user.out.OutApiLogin;
-import com.example.webmusic.controller.user.out.OutApiRegister;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.webmusic.controller.user.in.User.*;
+import com.example.webmusic.controller.user.out.User.*;
 import com.example.webmusic.mapper.user.UserMapper;
-import com.example.webmusic.models.album.Album;
 import com.example.webmusic.models.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
@@ -73,5 +74,49 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
     }
 
+    @Override
+    public void getAllUserInfo(int pagenum, int pagesize, OutApi_getAllUserInfo out) {
+        Page<User> page = new Page<>(pagenum, pagesize);
+        // 执行分页查询，使用 IPage<User> 接收分页结果
+        IPage<User> userPage = userMapper.selectPage(page, null);
+        List<User> userlist = userPage.getRecords();
+        long totals = userPage.getTotal();
+        out.setData(userlist);
+        out.setCode(200);
+        out.setTotals(totals);
+    }
 
+    @Override
+    public void getUserInfo(String name,OutApi_getUserInfo out) {
+        QueryWrapper<User> qw = new QueryWrapper<User>();
+        qw.like("username",name).or().like("nickname",name);
+        List<User> userlist = userMapper.selectList(qw);
+        if (userlist.size() == 0)
+            out.setCode(300);
+        else
+            out.setCode(200);
+        out.setData(userlist);
+    }
+
+    @Override
+    public int modifyUserInfo(User user){
+        int code;
+        int ok = userMapper.updateById(user);
+        if (ok == 1)
+            code = 200;
+        else
+            code = 300;
+        return code;
+    }
+
+    @Override
+    public int deleteUserInfo(int userID) {
+        int code;
+        int ok = userMapper.deleteById(userID);
+        if (ok == 1)
+            code = 200;
+        else
+            code = 300;
+        return code;
+    }
 }

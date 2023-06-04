@@ -12,6 +12,5 @@ public class AdminUser {
     @TableId(type = IdType.AUTO)
     private Integer admin_id;
     private String admin_name;
-    private String admin_nicname;
     private String admin_password;
 }
