@@ -15,7 +15,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
 
     //添加一首歌曲
     public boolean addSingleSong(Song song){
-
+        save(song);
         return true;
     }
 
