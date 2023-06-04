@@ -88,7 +88,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public void getUserInfo(String name,OutApi_getUserInfo out) {
-        QueryWrapper<User> qw = new QueryWrapper<User>();
+        QueryWrapper<User> qw = new QueryWrapper<>();
         qw.like("username",name).or().like("nickname",name);
         List<User> userlist = userMapper.selectList(qw);
         if (userlist.size() == 0)
