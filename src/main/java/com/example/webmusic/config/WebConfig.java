@@ -1,6 +1,6 @@
 package com.example.webmusic.config;
 
-import com.example.webmusic.router.Intercepter.LoginInterceptor;
+import com.example.webmusic.router.Intercepter.JWTInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -10,6 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //注册拦截器
-        registry.addInterceptor(new LoginInterceptor());
+        registry.addInterceptor(new JWTInterceptor())
+                .addPathPatterns("/User/modifyUploadPic");
     }
 }

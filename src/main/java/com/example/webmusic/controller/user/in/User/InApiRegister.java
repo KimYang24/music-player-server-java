@@ -1,4 +1,4 @@
-package com.example.webmusic.controller.user.in;
+package com.example.webmusic.controller.user.in.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
