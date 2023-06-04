@@ -8,7 +8,6 @@ import com.example.webmusic.controller.user.in.InApiRegister;
 import com.example.webmusic.controller.user.out.OutApiLogin;
 import com.example.webmusic.controller.user.out.OutApiRegister;
 import com.example.webmusic.mapper.user.UserMapper;
-import com.example.webmusic.models.album.Album;
 import com.example.webmusic.models.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
