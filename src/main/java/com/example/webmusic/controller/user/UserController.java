@@ -7,6 +7,7 @@ import com.example.webmusic.models.user.User;
 import com.example.webmusic.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -54,6 +55,13 @@ public class UserController {
         return out;
     }
 
+    @PostMapping("/User/addInfo")
+    public OutApi_addUserInfo addUserInfo(@RequestBody User user) {
+        OutApi_addUserInfo out = new OutApi_addUserInfo();
+        userService.addUserInfo(user, out);
+        return out;
+    }
+
     //修改用户信息
     @PostMapping("/User/modifyInfo")
     public Map<String,Object> modifyUser(@RequestBody User user) {
@@ -67,6 +75,16 @@ public class UserController {
     @GetMapping("/User/deleteInfo")
     public Map<String,Object> deleteUser(@RequestParam(value = "userId") int userID) {
         int code = userService.deleteUserInfo(userID);
+        Map<String,Object> m = new HashMap<>();
+        m.put("code",code);
+        return m;
+    }
+
+    //上传用户照片
+    @PostMapping("/User/modifyUploadPic")
+    public Map<String,Object> uploadUserPic(@RequestParam(value = "file") MultipartFile file,@RequestAttribute(value = "ID") int userID) {
+        System.out.println("进入controller成功");
+        int code = userService.updateUserPic(10, file);
         Map<String,Object> m = new HashMap<>();
         m.put("code",code);
         return m;
