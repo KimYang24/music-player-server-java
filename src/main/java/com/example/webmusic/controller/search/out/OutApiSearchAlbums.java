@@ -1,6 +1,6 @@
 package com.example.webmusic.controller.search.out;
 
-import com.example.webmusic.frontend_model.AlbumFront;
+import com.example.webmusic.models.album.Album;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OutApiSearchAlbums {
-    private List<AlbumFront> albumFronts;
+    private List<Album> albumFronts;
     private long code;
     private long pageTotal;
 }
