@@ -82,6 +82,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public void getAllUserInfo(int pagenum, int pagesize, OutApi_getAllUserInfo out) {
         Page<User> page = new Page<>(pagenum, pagesize);
         // 执行分页查询，使用 IPage<User> 接收分页结果
+
         IPage<User> userPage = userMapper.selectPage(page, null);
         List<User> userlist = userPage.getRecords();
         long totals = userPage.getTotal();
