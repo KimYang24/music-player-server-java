@@ -1,10 +1,18 @@
 package com.example.webmusic.frontend_model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * 歌单模型
  */
-@lombok.Data
-public class PlayList {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class PlayListFront {
     /**
      * 创建时间
      */

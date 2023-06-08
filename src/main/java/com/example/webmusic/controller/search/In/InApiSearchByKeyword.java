@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class InApiSearchByKeyword {
     private long pageSize;
     private long currentPage;
     private long keyWord;
 }
+

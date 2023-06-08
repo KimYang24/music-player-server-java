@@ -33,6 +33,7 @@ public class SongController {
     //获得特定歌曲
     @GetMapping(value = "/admin/getSongByName")
     public OutApiGetSong getSong(@RequestParam InApiGetSong inApiGetSong){
+        System.out.println("inApiGetSong = " + inApiGetSong);
         OutApiGetSong outApiGetSong=new OutApiGetSong();
         songService.getSong(inApiGetSong,outApiGetSong);
         return outApiGetSong;

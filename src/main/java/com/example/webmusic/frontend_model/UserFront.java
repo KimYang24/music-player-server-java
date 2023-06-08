@@ -1,8 +1,16 @@
 package com.example.webmusic.frontend_model;
 
 
-@lombok.Data
-public class User {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserFront {
     private String age;
     private String email;
     private String gender;

@@ -1,10 +1,18 @@
 package com.example.webmusic.frontend_model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * mv模型 仅作测试
  */
-@lombok.Data
-public class Mv {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class MvFront {
     /**
      * 表演者
      */

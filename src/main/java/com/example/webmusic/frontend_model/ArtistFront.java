@@ -1,10 +1,18 @@
 package com.example.webmusic.frontend_model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * 歌手模型
  */
-@lombok.Data
-public class Artist {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ArtistFront {
     /**
      * 歌手专辑数量
      */

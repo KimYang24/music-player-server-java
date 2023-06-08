@@ -1,8 +1,16 @@
 package com.example.webmusic.frontend_model;
 
 
-@lombok.Data
-public class Album {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class AlbumFront {
     private String album;
     private Long albumId;
     private String artist;

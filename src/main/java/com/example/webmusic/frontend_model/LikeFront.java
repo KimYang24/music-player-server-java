@@ -1,10 +1,18 @@
 package com.example.webmusic.frontend_model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * 收藏模型
  */
-@lombok.Data
-public class Like {
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class LikeFront {
     /**
      * 喜欢的专辑的id
      */

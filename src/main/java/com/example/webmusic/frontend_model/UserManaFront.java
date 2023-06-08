@@ -4,7 +4,7 @@ package com.example.webmusic.frontend_model;
  * 管理前端用户模型
  */
 @lombok.Data
-public class UserMana {
+public class UserManaFront {
     private Long age;
     private String email;
     private String gender;
