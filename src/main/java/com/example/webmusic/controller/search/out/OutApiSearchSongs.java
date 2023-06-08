@@ -1,7 +1,7 @@
 package com.example.webmusic.controller.search.out;
 
 
-import com.example.webmusic.frontend_model.SongFront;
+import com.example.webmusic.models.song.Song;
 import lombok.Data;
 
 import java.util.List;
@@ -10,5 +10,5 @@ import java.util.List;
 public class OutApiSearchSongs {
     private long code;
     private long pageTotal;
-    private List<SongFront> songFronts;
+    private List<Song> songFronts;
 }
