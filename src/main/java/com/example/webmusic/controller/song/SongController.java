@@ -79,4 +79,11 @@ public class SongController {
         return outApiDeleteSong;
     }
 
+    //根据songid获得一首歌曲
+    @GetMapping("/detail/song")
+    public OutApiGetOneSong getOneSong(@RequestParam("songId") int songID) {
+        OutApiGetOneSong out = new OutApiGetOneSong();
+        songService.getOneSongById(songID,out);
+        return out;
+    }
 }
