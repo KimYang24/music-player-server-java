@@ -21,16 +21,16 @@ public class Song {
      * 歌曲专辑名
      */
     private String album;
-    private Long album_id;
+    private long album_id;
     /**
      * 歌手名称
      */
     private String artist;
-    private Long artist_id;
+    private long artist_id;
     /**
      * 歌曲秒数时长
      */
-    private Long duration;
+    private long duration;
     /**
      * 歌词url
      */
@@ -38,7 +38,7 @@ public class Song {
     /**
      * 评论数
      */
-    private String mark;
+    private long mark;
     /**
      * 歌曲名称
      */
@@ -50,7 +50,7 @@ public class Song {
     /**
      * 歌曲播放次数
      */
-    private String pop;
+    private long pop;
     /**
      * 发行时间
      */

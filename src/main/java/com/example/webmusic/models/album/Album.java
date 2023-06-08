@@ -37,5 +37,18 @@ public class Album {
     /**
      * 歌曲数量
      */
-    private int size;
+    private long size;
+    /**
+     * 专辑类型
+     */
+    private String type;
+    /**
+     * 专辑发行时间
+     */
+    private String publish_time;
+    /**
+     * 专辑照片封面
+     */
+    private String pic_url;
+
 }

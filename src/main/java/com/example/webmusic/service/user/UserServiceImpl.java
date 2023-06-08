@@ -14,6 +14,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.web.multipart.MultipartFile;
 import com.example.webmusic.utils.oss.UploadFile;
 import com.example.webmusic.utils.jwt.JwtUtil;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -159,7 +161,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             code = 300;
             return code;
         }
-        code = UploadFile.uploadFile(userID, file, 1);
+        try {
+            code = UploadFile.uploadFile(userID, file, 1);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return code;
     }
 }

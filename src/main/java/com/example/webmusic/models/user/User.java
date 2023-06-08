@@ -26,14 +26,14 @@ public class User {
     @TableId(type=IdType.AUTO)
     @JsonProperty("userId")
     private long user_id;
-    private int age;
+    private String age;
     private String email;
     private String gender;
     private String nickname;
     private String password;
     private String phone;
     private String username;
-    @JsonProperty("picUrl")
+    @JsonProperty("pic_url")
     @TableField("pic_url")
-    private String picurl;
+    private String pic_url;
 }

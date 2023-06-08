@@ -7,10 +7,10 @@ import lombok.Data;
 
 
 @Data
-@TableName(value = "admin_user")
+@TableName(value = "adminUser")
 public class AdminUser {
     @TableId(type = IdType.AUTO)
     private Integer admin_id;
-    private String admin_name;
-    private String admin_password;
+    private String adminname;
+    private String password;
 }

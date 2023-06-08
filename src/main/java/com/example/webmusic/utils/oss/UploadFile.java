@@ -13,7 +13,7 @@ import java.util.Objects;
 import static com.example.webmusic.config.AliyunOssConfig.createOssClient;
 
 public class UploadFile {
-    public static int uploadFile(int ID, MultipartFile file,int type) {
+    public static int uploadFile(int ID, MultipartFile file,int type) throws IOException {
         System.out.println("进入uploadFile成功");
         int code = 200;
         String filename = file.getOriginalFilename();
