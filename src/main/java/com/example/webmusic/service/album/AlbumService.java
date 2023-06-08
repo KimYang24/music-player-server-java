@@ -5,7 +5,7 @@ import com.example.webmusic.controller.album.in.*;
 import com.example.webmusic.controller.album.out.OutApiAddAlbum;
 import com.example.webmusic.controller.album.out.OutApiDeleteAlbum;
 import com.example.webmusic.controller.album.out.OutApiGetAlbum;
-import com.example.webmusic.controller.album.out.OutApiModiAlbumInfo;
+import com.example.webmusic.controller.album.out.OutApiModifyAlbumInfo;
 import com.example.webmusic.controller.song.out.OutApiDeleteSong;
 import com.example.webmusic.controller.song.out.OutApiGetPageSong;
 import com.example.webmusic.models.album.Album;
@@ -21,7 +21,7 @@ public interface AlbumService extends IService<Album> {
     void addAlbum(InApiAddAlbum inApiAddAlbum, OutApiAddAlbum outApiAddAlbum);
 
     //修改专辑信息
-    void modifyAlbumInfo(InApiModifyAlbumInfo inApiModifyAlbumInfo, OutApiModiAlbumInfo outApiModiAlbumInfo);
+    void modifyAlbumInfo(InApiModifyAlbumInfo inApiModifyAlbumInfo, OutApiModifyAlbumInfo outApiModifyAlbumInfo);
 
     //删除专辑
     void deleteAlbum(InApiDeleteAlbum inApiDeleteAlbum, OutApiDeleteAlbum outApiDeleteAlbum);

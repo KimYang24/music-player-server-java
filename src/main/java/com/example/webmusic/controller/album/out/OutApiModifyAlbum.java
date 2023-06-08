@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OutApiModiAlbumInfo {
+public class OutApiModifyAlbum {
+
 }

@@ -5,7 +5,7 @@ import com.example.webmusic.controller.album.in.*;
 import com.example.webmusic.controller.album.out.OutApiAddAlbum;
 import com.example.webmusic.controller.album.out.OutApiDeleteAlbum;
 import com.example.webmusic.controller.album.out.OutApiGetAlbum;
-import com.example.webmusic.controller.album.out.OutApiModiAlbumInfo;
+import com.example.webmusic.controller.album.out.OutApiModifyAlbumInfo;
 import com.example.webmusic.controller.song.out.OutApiGetPageSong;
 import com.example.webmusic.mapper.album.AlbumMapper;
 import com.example.webmusic.models.album.Album;
@@ -38,7 +38,7 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
 
     @Override
     //修改专辑信息
-    public void modifyAlbumInfo(InApiModifyAlbumInfo inApiModifyAlbumInfo, OutApiModiAlbumInfo outApiModiAlbumInfo){
+    public void modifyAlbumInfo(InApiModifyAlbumInfo inApiModifyAlbumInfo, OutApiModifyAlbumInfo outApiModifyAlbumInfo){
 
     }
 
