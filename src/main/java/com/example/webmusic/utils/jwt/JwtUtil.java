@@ -14,14 +14,7 @@ public class JwtUtil {
 
     private static final String secret = "mySecretKey";  // JWT 密钥
 
-    /***
-     * 生成 JWT
-     * @param subject 主题
-     * @param claims 自定义声明
-     * @param expiration 过期时间，单位为秒
-     * @return JWT
-     */
-    public String generateToken(String subject, int ID, int expiration) {
+    public static String generateToken(long ID) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
 
@@ -30,25 +23,20 @@ public class JwtUtil {
         claims.put("ID",ID);
 
         // 设置 JWT 有效期
-        long expMillis = nowMillis + expiration * 1000L;
+        long expMillis = nowMillis + 300 * 1000L;
         Date exp = new Date(expMillis);
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(subject)
                 .setIssuedAt(now)
                 .setExpiration(exp)
                 .signWith(SignatureAlgorithm.HS256, secret.getBytes())
                 .compact();
     }
 
-    /***
-     * 验证 JWT
-     * @param token JWT
-     * @return
-     */
-    public Claims validateToken(String token) {
+//验证token
+    public  static Claims validateToken(String token) {
+        System.out.println("进入验证函数");
         return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
     }
-
 }
