@@ -29,4 +29,5 @@ public interface SongService extends IService<Song> {
 
     //删除歌曲
     void deleteSong(InApiDeleteSong inApiDeleteSong,OutApiDeleteSong outApiDeleteSong);
+    void getSongListByArtist(InApiGetSongsByArtist inApiGetSongsByArtist,OutApiGetSongsByArtist outApiGetSongsByArtist);
 }

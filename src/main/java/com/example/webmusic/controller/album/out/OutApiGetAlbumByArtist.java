@@ -12,7 +12,11 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OutApiGetAlbum {//名字获取专辑
-    private int code;
+public class OutApiGetAlbumByArtist {
     private List<Album> data;
+    private long code;
+    /**
+     * 有多少页数据
+     */
+    private String pageTotal;
 }

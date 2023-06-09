@@ -114,4 +114,21 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         else
             outApiDeleteSong.setCode(300);
     }
+
+    @Override
+    public void getSongListByArtist(InApiGetSongsByArtist inApiGetSongsByArtist,OutApiGetSongsByArtist outApiGetSongsByArtist){
+        QueryWrapper<Song> qw = new QueryWrapper<>();
+        qw.like("artist_id",inApiGetSongsByArtist.getArtistId());
+        List<Song> songList = songMapper.selectList(qw);
+        int total = songList.size();
+        long totalPages = (total + inApiGetSongsByArtist.getPageSize() - 1) / inApiGetSongsByArtist.getPageSize();
+        if(total ==0){
+            outApiGetSongsByArtist.setCode(200);
+        }
+        else{
+            outApiGetSongsByArtist.setCode(300);
+            outApiGetSongsByArtist.setPageTotal(totalPages);
+            outApiGetSongsByArtist.setData(songList);
+        }
+    }
 }
