@@ -29,4 +29,7 @@ public interface SongService extends IService<Song> {
 
     //删除歌曲
     void deleteSong(InApiDeleteSong inApiDeleteSong,OutApiDeleteSong outApiDeleteSong);
+
+    //根据songId获取单首歌曲
+    void getOneSongById(int songID,OutApiGetOneSong out);
 }
