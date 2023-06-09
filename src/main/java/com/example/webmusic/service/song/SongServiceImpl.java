@@ -116,6 +116,19 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
     }
 
     @Override
+    //根据songId获取单首歌曲
+    public void getOneSongById(int songID,OutApiGetOneSong out) {
+        Song song = songMapper.selectById(songID);
+        if(song != null) {
+            out.setCode(200);
+        }
+        else {
+            out.setCode(300);
+        }
+        out.setSong(song);
+    }
+
+    @Override
     public void getSongListByArtist(InApiGetSongsByArtist inApiGetSongsByArtist,OutApiGetSongsByArtist outApiGetSongsByArtist){
         QueryWrapper<Song> qw = new QueryWrapper<>();
         qw.like("artist_id",inApiGetSongsByArtist.getArtistId());
