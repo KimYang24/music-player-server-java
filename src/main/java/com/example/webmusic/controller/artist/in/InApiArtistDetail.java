@@ -1,4 +1,4 @@
-package com.example.webmusic.controller.album.out;
+package com.example.webmusic.controller.artist.in;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OutApiAddAlbum {
-    private int code;
+public class InApiArtistDetail {//歌手详情页
+    private int artistId;
 }

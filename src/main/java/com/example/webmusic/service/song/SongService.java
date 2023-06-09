@@ -32,4 +32,5 @@ public interface SongService extends IService<Song> {
 
     //根据songId获取单首歌曲
     void getOneSongById(int songID,OutApiGetOneSong out);
+    void getSongListByArtist(InApiGetSongsByArtist inApiGetSongsByArtist,OutApiGetSongsByArtist outApiGetSongsByArtist);
 }
