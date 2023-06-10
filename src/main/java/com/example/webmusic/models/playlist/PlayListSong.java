@@ -4,6 +4,7 @@ package com.example.webmusic.models.playlist;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -19,9 +20,11 @@ public class PlayListSong {
     /**
      * 歌单的id
      */
+    @JsonProperty("playListId")
     private long playlist_id;
     /**
      * 歌曲的id
      */
+    @JsonProperty("songId")
     private long song_id;
 }

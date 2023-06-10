@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @Builder
-public class InApiGetAlbum {
-    private int albumName;
+public class InApiAlbumDetail {//专辑详情页
+    private int albumId;
 }

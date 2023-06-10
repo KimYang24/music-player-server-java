@@ -1,5 +1,6 @@
-package com.example.webmusic.controller.album.out;
+package com.example.webmusic.controller.song.out;
 
+import com.example.webmusic.models.song.Song;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OutApiAddAlbum {
-    private int code;
+public class OutApiGetOneSong {
+    int code;
+    Song song;
 }
