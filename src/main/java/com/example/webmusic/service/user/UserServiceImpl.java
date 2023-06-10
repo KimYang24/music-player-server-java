@@ -6,8 +6,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.webmusic.controller.user.in.User.*;
 import com.example.webmusic.controller.user.out.User.*;
+import com.example.webmusic.frontend_model.UserFront;
 import com.example.webmusic.mapper.user.UserMapper;
 import com.example.webmusic.models.user.User;
+import com.example.webmusic.service.log.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -24,6 +26,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private LogService logService;
 
     @Override
     public void userLogin(InApiLogin inApiLogin, OutApiLogin outApiLogin) {
@@ -66,12 +70,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         queryWrapper.eq("phone", user.getPhone());
         // 查询数据库是否存在符合条件的记录
         User _user = getOne(queryWrapper);
-        //手机号不存在
+        //可以注册
         if(_user==null){
             outApiRegister.setCode(200);
             save(user);
             long id = user.getUser_id();
             updateById(user);
+            //发送注册日志
+            logService.saveRegisterLog(user);
             outApiRegister.setToken("123123213");
             outApiRegister.setUserId(id);
         } else{
@@ -167,5 +173,30 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new RuntimeException(e);
         }
         return code;
+    }
+
+    @Override
+    public void getUserProfile(long userId,OutApiGetUserProfile outApiGetUserProfile) {
+        // 创建查询条件
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id",userId);
+        // 查询数据库是否存在符合条件的记录
+        User user = getOne(queryWrapper);
+        //用户不存在
+        if(user==null){
+            outApiGetUserProfile.setCode(300);
+        } else{
+            UserFront userFront = UserFront.builder()
+                    .age(user.getAge())
+                    .email(user.getEmail())
+                    .gender(user.getGender())
+                    .nickname(user.getNickname())
+                    .phone(user.getPhone())
+                    .picUrl(user.getPic_url())
+                    .username(user.getUsername())
+                    .build();
+            outApiGetUserProfile.setProfile(userFront);
+            outApiGetUserProfile.setCode(200);
+        }
     }
 }

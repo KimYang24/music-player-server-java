@@ -23,7 +23,7 @@ public class OutApiArtistDetail {//歌手详情页
         /**
          * 歌手专辑数量
          */
-        private String albumSize;
+        private long albumSize;
         /**
          * 歌手名
          */
@@ -44,7 +44,7 @@ public class OutApiArtistDetail {//歌手详情页
         /**
          * 歌手歌曲总数
          */
-        private String songSize;
+        private long songSize;
     }
 
 }

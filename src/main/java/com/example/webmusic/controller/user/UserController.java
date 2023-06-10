@@ -89,4 +89,12 @@ public class UserController {
         m.put("code",code);
         return m;
     }
+
+    //获取用户个人信息（用户端）
+    @GetMapping("/user/profile")
+    public OutApiGetUserProfile getUserProfile(@RequestParam(value = "userId") long userId){
+        OutApiGetUserProfile outApiGetUserProfile = new OutApiGetUserProfile();
+        userService.getUserProfile(userId,outApiGetUserProfile);
+        return outApiGetUserProfile;
+    }
 }
