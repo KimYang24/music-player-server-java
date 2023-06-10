@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class InApiSearchByKeyword {
     private long pageSize;
     private long currentPage;
-    private long keyWord;
+    private String keyWord;
 }
 

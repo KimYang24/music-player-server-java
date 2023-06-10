@@ -10,5 +10,5 @@ import java.util.List;
 public class OutApiSearchSongs {
     private long code;
     private long pageTotal;
-    private List<Song> songFronts;
+    private List<Song> songs;
 }

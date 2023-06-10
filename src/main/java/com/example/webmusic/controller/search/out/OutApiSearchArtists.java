@@ -8,7 +8,7 @@ import java.util.List;
 
 @lombok.Data
 public class OutApiSearchArtists {
-    private List<Artist> artistFronts;
+    private List<Artist> artists;
     private long code;
     private long pageTotal;
 }

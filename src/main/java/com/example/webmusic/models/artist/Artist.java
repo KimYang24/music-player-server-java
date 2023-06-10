@@ -18,7 +18,7 @@ public class Artist {
     /**
      * 歌手专辑数量
      */
-    private String album_size;
+    private long album_size;
     /**
      * 歌手名字首字母
      */
@@ -43,5 +43,5 @@ public class Artist {
     /**
      * 歌手歌曲总数
      */
-    private String song_size;
+    private long song_size;
 }

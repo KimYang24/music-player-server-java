@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OutApiSearchAlbums {
-    private List<Album> albumFronts;
+    private List<Album> albums;
     private long code;
     private long pageTotal;
 }

@@ -8,8 +8,8 @@ import java.util.List;
 
 @lombok.Data
 public class OutApiHotByKeyword {
-    private List<Album> albumFronts;
-    private List<Artist> artistFronts;
+    private List<Album> albums;
+    private List<Artist> artists;
     private long code;
-    private List<Song> songFronts;
+    private List<Song> songs;
 }

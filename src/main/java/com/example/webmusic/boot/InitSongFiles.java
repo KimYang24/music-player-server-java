@@ -22,6 +22,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.nio.file.StandardCopyOption;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,7 +51,7 @@ public class InitSongFiles {
         // 设置日志级别为OFF，禁用日志输出
         jAudioTaggerLogger.setLevel(Level.OFF);
         //设置处理的问价夹目录
-        String folderPath = "C:/Users/37359/Desktop/新建文件夹";
+        String folderPath = "C:/Users/37359/Desktop/2";
         //输出命名后歌曲问价夹的目录
         String destFolderPath = "C:/Users/37359/Desktop/rename";
         File destFolder = new File(destFolderPath);
@@ -93,6 +94,7 @@ public class InitSongFiles {
 //                        System.out.println("专辑: " + album);
 //                    }
                     //插入歌曲数据到数据库
+                    Random random = new Random();
                     Song song = Song.builder()
                             .name(title)
                             .artist(artist)
@@ -100,14 +102,16 @@ public class InitSongFiles {
                             .publish_time(year)
                             .duration(trackLength)
                             .url("")
+                            .mark(random.nextInt(8000)+200)
+                            .pop(random.nextInt(3000)+50)
                             .build();
 
                     songService.save(song);
                     //如下所示
                     System.out.println("file.getName() = " + file.getName());
                     String filename = file.getName();
-                    String fileType = filename.substring(filename.indexOf("."));
-                    String songName = filename.substring(0,filename.indexOf("."));
+                    String fileType = filename.substring(filename.lastIndexOf("."));
+                    String songName = filename.substring(0,filename.lastIndexOf("."));
 //                    System.out.println("fileType = " + fileType);
 //                    System.out.println("songName = " + songName);
                     //根据ID补充url信息
@@ -118,8 +122,8 @@ public class InitSongFiles {
                     //看看是否有歌词
                     for(File lrcFile : files){
                         String lrcFileName = lrcFile.getName();
-                        String lrcFileNameSong = lrcFileName.substring(0,lrcFileName.indexOf("."));
-                        String lrcFileType = lrcFileName.substring(lrcFileName.indexOf("."));
+                        String lrcFileNameSong = lrcFileName.substring(0,lrcFileName.lastIndexOf("."));
+                        String lrcFileType = lrcFileName.substring(lrcFileName.lastIndexOf("."));
                         if (lrcFile.isFile()&& lrcFileType.equals(".lrc") && lrcFileNameSong.equals(songName)){
                             //是对应的歌词文件
                             //插入lrcurl字段
@@ -193,11 +197,20 @@ public class InitSongFiles {
                     .name(columnValue)
                     .size(1)
                     .artist_id(song.getArtist_id())
+                    .artist(song.getArtist())
+                    .publish_time(song.getPublish_time())
                     .build();
             // 插入新的记录
             albumService.save(newAlbum);
             //返回album id
             song.setAlbum_id(newAlbum.getAlbum_id());
+            //歌手专辑数量加1
+            // 创建查询条件
+            QueryWrapper<Artist> qw = new QueryWrapper<>();
+            qw.eq("name", song.getArtist());
+            Artist art = artistService.getOne(qw);
+            art.setAlbum_size(art.getAlbum_size()+1);
+            artistService.updateById(art);
         } else {
             // 数据库中已存在符合条件的记录，不做任何操作
             album.setSize(album.getSize()+1);
@@ -218,6 +231,7 @@ public class InitSongFiles {
             // 数据库中不存在符合条件的记录，创建新的记录
             Artist newArtist = Artist.builder()
                     .name(columnValue)
+                    .song_size(1)
                     .build();
             // 插入新的记录
             artistService.save(newArtist);
@@ -225,6 +239,8 @@ public class InitSongFiles {
             song.setArtist_id(newArtist.getArtist_id());
         } else {
             // 数据库中已存在符合条件的记录，不做任何操作
+            artist.setSong_size(artist.getSong_size()+1);
+            artistService.updateById(artist);
             song.setArtist_id(artist.getArtist_id());
         }
     }

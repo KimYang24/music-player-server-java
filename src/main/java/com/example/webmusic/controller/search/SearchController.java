@@ -6,9 +6,7 @@ import com.example.webmusic.controller.search.out.OutApiSearchAlbums;
 import com.example.webmusic.controller.search.out.OutApiSearchArtists;
 import com.example.webmusic.controller.search.out.OutApiSearchSongs;
 import com.example.webmusic.service.search.SearchService;
-import com.example.webmusic.service.song.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,11 +33,11 @@ public class SearchController {
     @GetMapping(value = "/search/song")
     public OutApiSearchSongs searchSongs(@RequestParam(value = "pageSize")long pageSize,
                                          @RequestParam(value = "currentPage")long currentPage ,
-                                         @RequestParam(value = "keyWord")long keyWord){
+                                         @RequestParam(value = "keyWord")String keyWord){
         InApiSearchByKeyword inApiSearchByKeyword = InApiSearchByKeyword.builder()
                 .currentPage(pageSize)
-                .keyWord(currentPage)
-                .pageSize(keyWord).build();
+                .keyWord(keyWord)
+                .pageSize(pageSize).build();
         OutApiSearchSongs outApiSearchSongs = new OutApiSearchSongs();
         searchService.searchSongsByKeyword(inApiSearchByKeyword,outApiSearchSongs);
         return outApiSearchSongs;
@@ -48,16 +46,30 @@ public class SearchController {
 
     //关键词搜索歌手
     @GetMapping(value = "/search/artist")
-    public OutApiSearchArtists searchArtists(@RequestParam InApiSearchByKeyword inApiSearchByKeyword){
+    public OutApiSearchArtists searchArtists(@RequestParam(value = "pageSize")long pageSize,
+                                             @RequestParam(value = "currentPage")long currentPage ,
+                                             @RequestParam(value = "keyWord")String keyWord){
+        InApiSearchByKeyword inApiSearchByKeyword = InApiSearchByKeyword.builder()
+                .currentPage(pageSize)
+                .keyWord(keyWord)
+                .pageSize(pageSize).build();
         OutApiSearchArtists outApiSearchArtists = new OutApiSearchArtists();
+        searchService.searchArtistsByKeyword(inApiSearchByKeyword,outApiSearchArtists);
         return outApiSearchArtists;
     }
 
 
     //关键词搜索专辑
     @GetMapping(value = "/search/album")
-    public OutApiSearchAlbums searchAlbums(@RequestParam InApiSearchByKeyword inApiSearchByKeyword){
+    public OutApiSearchAlbums searchAlbums(@RequestParam(value = "pageSize")long pageSize,
+                                           @RequestParam(value = "currentPage")long currentPage ,
+                                           @RequestParam(value = "keyWord")String keyWord){
+        InApiSearchByKeyword inApiSearchByKeyword = InApiSearchByKeyword.builder()
+                .currentPage(pageSize)
+                .keyWord(keyWord)
+                .pageSize(pageSize).build();
         OutApiSearchAlbums outApiSearchAlbums = new OutApiSearchAlbums();
+        searchService.searchAlbumsByKeyword(inApiSearchByKeyword,outApiSearchAlbums);
         return outApiSearchAlbums;
     }
 }
