@@ -6,6 +6,9 @@ import com.example.webmusic.controller.artist.in.InApiArtistDetail;
 import com.example.webmusic.controller.artist.in.InApiGetArtistDescribe;
 import com.example.webmusic.controller.artist.out.OutApiArtistDetail;
 import com.example.webmusic.controller.artist.out.OutApiGetArtistDescribe;
+import com.example.webmusic.controller.artist.in.InApi_getSelectedArtist;
+import com.example.webmusic.controller.artist.out.OutApi_getRecommendArtist;
+import com.example.webmusic.controller.artist.out.OutApi_getSelectedArtist;
 import com.example.webmusic.models.artist.Artist;
 
 public interface ArtistService extends IService<Artist> {
@@ -13,4 +16,7 @@ public interface ArtistService extends IService<Artist> {
     void artistDetail(InApiArtistDetail inApiSingerDetail, OutApiArtistDetail outApiSingerDetail);
 
     void getArtistDescribe(InApiGetArtistDescribe inApiGetArtistDescribe, OutApiGetArtistDescribe outApiGetArtistDescribe);
+    void getArtistByCon(InApi_getSelectedArtist in, OutApi_getSelectedArtist out);
+
+    void getRandomArtist(OutApi_getRecommendArtist out);
 }

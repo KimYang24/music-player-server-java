@@ -80,6 +80,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
     }
 
+    //获取特定页用户信息
     @Override
     public void getAllUserInfo(int pagenum, int pagesize, OutApi_getAllUserInfo out) {
         Page<User> page = new Page<>(pagenum, pagesize);
@@ -93,6 +94,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         out.setTotals(totals);
     }
 
+    //获取特定用户信息
     @Override
     public void getUserInfo(String name,OutApi_getUserInfo out) {
         QueryWrapper<User> qw = new QueryWrapper<>();
@@ -106,6 +108,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     }
 
+    //添加用户信息
     @Override
     public void addUserInfo(User user,OutApi_addUserInfo out) {
         QueryWrapper<User> qw = new QueryWrapper<>();
@@ -130,6 +133,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         out.setTotals(totals);
     }
 
+    //修改用户信息
     @Override
     public int modifyUserInfo(User user){
         int code;
@@ -141,6 +145,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return code;
     }
 
+    //删除用户信息
     @Override
     public int deleteUserInfo(int userID) {
         int code;
@@ -152,6 +157,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return code;
     }
 
+    //上传用户头像
     @Override
     public int updateUserPic(int userID, MultipartFile file) {
         System.out.println("进入service成功");

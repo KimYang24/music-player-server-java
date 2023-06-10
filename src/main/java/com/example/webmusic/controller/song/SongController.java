@@ -93,4 +93,12 @@ public class SongController {
         songService.getSongListByArtist(inApiGetSongsByArtist,outApiGetSongsByArtist);
         return outApiGetSongsByArtist;
     }
+
+    //歌曲推荐
+    @GetMapping("/discover/song")
+    public OutApiGetRecommendSong getRecommendSong() {
+        OutApiGetRecommendSong out = new OutApiGetRecommendSong();
+        songService.getRandomSong(out);
+        return out;
+    }
 }
