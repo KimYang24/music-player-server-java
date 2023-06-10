@@ -5,12 +5,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.webmusic.controller.album.in.*;
 import com.example.webmusic.controller.album.out.*;
 import com.example.webmusic.controller.song.out.OutApiGetPageSong;
+import com.example.webmusic.controller.song.out.OutApiGetRecommendSong;
 import com.example.webmusic.mapper.album.AlbumMapper;
 import com.example.webmusic.mapper.song.SongMapper;
 import com.example.webmusic.models.album.Album;
 import com.example.webmusic.models.song.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import java.util.List;
 
@@ -60,6 +63,7 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
 
     }
 
+    @Override
     //专辑详情页
     public void albumDetail(InApiAlbumDetail inApiAlbumDetail, OutApiAlbumDetail outApiAlbumDetail){
         QueryWrapper<Album> qw=new QueryWrapper<>();
@@ -78,6 +82,7 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
         }
     }
 
+    @Override
     //分页获取歌手专辑
     public void getAlbumByArtist(InApiGetAlbumByArtist inApiGetAlbumByArtist, OutApiGetAlbumByArtist outApiGetAlbumByArtist) {
         QueryWrapper<Album> qw = new QueryWrapper<>();
@@ -93,4 +98,16 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
             outApiGetAlbumByArtist.setData(albumList);
         }
     }
+    @Override
+    //专辑推荐，随机返回30张专辑
+    public void getRandomAlbum(OutApiGetRecommendAlbum out) {
+        List<Album> albums = albumMapper.selectList(new QueryWrapper<Album>().orderByAsc("rand()").last("limit 30"));
+        if(albums == null){
+            out.setCode(300);
+        } else {
+            out.setCode(200);
+        }
+        out.setAlbums(albums);
+    }
+
 }

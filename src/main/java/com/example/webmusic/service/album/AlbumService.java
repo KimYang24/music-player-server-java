@@ -5,6 +5,7 @@ import com.example.webmusic.controller.album.in.*;
 import com.example.webmusic.controller.album.out.*;
 import com.example.webmusic.controller.song.in.InApiGetSongsByArtist;
 import com.example.webmusic.controller.song.out.OutApiDeleteSong;
+import com.example.webmusic.controller.album.out.*;
 import com.example.webmusic.controller.song.out.OutApiGetPageSong;
 import com.example.webmusic.controller.song.out.OutApiGetSongsByArtist;
 import com.example.webmusic.models.album.Album;
@@ -24,6 +25,9 @@ public interface AlbumService extends IService<Album> {
 
     //删除专辑
     void deleteAlbum(InApiDeleteAlbum inApiDeleteAlbum, OutApiDeleteAlbum outApiDeleteAlbum);
+
+    //歌曲推荐；随机返回歌曲
+    void getRandomAlbum (OutApiGetRecommendAlbum out);
 
     //专辑详情页
     void albumDetail(InApiAlbumDetail inApiAlbumDetail, OutApiAlbumDetail outApiAlbumDetail);

@@ -144,4 +144,16 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
             outApiGetSongsByArtist.setData(songList);
         }
     }
+
+    @Override
+    //随机返回30首歌曲
+    public void getRandomSong (OutApiGetRecommendSong out) {
+        List<Song> songs = songMapper.selectList(new QueryWrapper<Song>().orderByAsc("rand()").last("limit 30"));
+        if(songs == null){
+            out.setCode(300);
+        } else {
+            out.setCode(200);
+        }
+        out.setSongs(songs);
+    }
 }
