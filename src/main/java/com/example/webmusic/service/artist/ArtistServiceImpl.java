@@ -2,12 +2,9 @@ package com.example.webmusic.service.artist;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.webmusic.controller.artist.in.InApiArtistDetail;
-import com.example.webmusic.controller.artist.in.InApiGetArtistDescribe;
 import com.example.webmusic.controller.artist.out.OutApiArtistDetail;
 import com.example.webmusic.controller.artist.out.OutApiGetArtistDescribe;
 import com.example.webmusic.controller.artist.in.InApi_getSelectedArtist;

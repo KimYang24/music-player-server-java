@@ -13,7 +13,6 @@ public interface ArtistService extends IService<Artist> {
     //歌手详情页
     void artistDetail(long artistId, OutApiArtistDetail outApiSingerDetail);
 
-    void getArtistDescribe(InApiGetArtistDescribe inApiGetArtistDescribe, OutApiGetArtistDescribe outApiGetArtistDescribe);
     void getArtistByCon(InApi_getSelectedArtist in, OutApi_getSelectedArtist out);
 
     void getRandomArtist(OutApi_getRecommendArtist out);
