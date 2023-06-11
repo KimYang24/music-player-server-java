@@ -1,4 +1,5 @@
-package com.example.webmusic.controller.album.out;
+package com.example.webmusic.controller.playlist.in;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OutApiDeleteAlbum {
-    private int code;
+public class InApiGetHotPlaylist {
+    private int currentPage;
+    private int pageSize;
 }

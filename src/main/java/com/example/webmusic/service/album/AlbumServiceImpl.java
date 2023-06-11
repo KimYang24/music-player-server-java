@@ -1,23 +1,20 @@
 package com.example.webmusic.service.album;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.webmusic.controller.album.in.*;
 import com.example.webmusic.controller.album.out.*;
-import com.example.webmusic.controller.song.out.OutApiGetPageSong;
-import com.example.webmusic.controller.song.out.OutApiGetRecommendSong;
 import com.example.webmusic.mapper.album.AlbumMapper;
 import com.example.webmusic.mapper.song.SongMapper;
 import com.example.webmusic.models.album.Album;
 import com.example.webmusic.models.song.Song;
+import com.example.webmusic.models.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import java.util.List;
-
-import static net.sf.jsqlparser.util.validation.metadata.NamedObject.column;
 
 @Service
 public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements AlbumService {
@@ -28,8 +25,16 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
 
     @Override
     //获取特定页专辑
-    public void getPageAlbum(InApiGetPageAlbum inApiGetPageAlbum, OutApiGetPageSong outApiGetPageSong){
+    public void getPageAlbum(InApiGetPageAlbum inApiGetPageAlbum, OutApiGetPageAlbum outApiGetPageAlbum){
+        Page<Album> page = new Page<>(inApiGetPageAlbum.getCurrentPage(), inApiGetPageAlbum.getPageSize());
+        // 执行分页查询，使用 IPage<User> 接收分页结果
 
+        IPage<Album> albumPage = albumMapper.selectPage(page, null);
+        List<Album> albumlist = albumPage.getRecords();
+        long totals = albumPage.getTotal();
+        outApiGetPageAlbum.setData(albumlist);
+        outApiGetPageAlbum.setCode(200);
+        outApiGetPageAlbum.setTotals(totals);
     }
 
     @Override
@@ -47,20 +52,85 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
 
     @Override
     //添加专辑
-    public void addAlbum(InApiAddAlbum inApiAddAlbum, OutApiAddAlbum outApiAddAlbum){
-
+    public void addAlbum(Album album, OutApiAddAlbum outApiAddAlbum) {
+        QueryWrapper<Album> qw = new QueryWrapper<>();
+        //排除同一歌手的同一个专辑
+        qw.eq("Name",album.getName()).and(albumQueryWrapper -> albumQueryWrapper.eq("artist_id", album.getAlbum_id()));
+        Album temp = albumMapper.selectOne(qw);
+        if(temp != null) {
+            outApiAddAlbum.setCode(300);
+            return;
+        }
+        int result = albumMapper.insert(album);
+        if(result == 0){
+            outApiAddAlbum.setCode(300);
+            return;
+        }
+        int totals = albumMapper.selectCount(null);
+        int totalPages = totals % 10 == 0 ? totals / 10 : totals / 10 + 1;
+        IPage<Album> page = new Page<>(totalPages, 10);
+        List<Album> albumList = albumMapper.selectPage(page, null).getRecords();
+        outApiAddAlbum.setData(albumList);
+        outApiAddAlbum.setCode(200);
+        outApiAddAlbum.setCurrentPage(totalPages);
+        outApiAddAlbum.setTotalPage(totals);
     }
 
     @Override
     //修改专辑信息
     public void modifyAlbumInfo(InApiModifyAlbumInfo inApiModifyAlbumInfo, OutApiModifyAlbum outApiModifyAlbumInfo){
-
+        Album album = albumMapper.selectById(inApiModifyAlbumInfo.getData().getAlbum_id());
+        String OldName = album.getName();
+        int ok = albumMapper.updateById(inApiModifyAlbumInfo.getData());
+        if (ok == 1)
+            outApiModifyAlbumInfo.setCode(200);
+        else{
+            outApiModifyAlbumInfo.setCode(300);
+            if (!inApiModifyAlbumInfo.getData().getName().equals(OldName)) {
+                QueryWrapper<Song> qw = new QueryWrapper<>();
+                qw.like("album_id", inApiModifyAlbumInfo.getData().getAlbum_id());
+                List<Song> songlist = songMapper.selectList(qw);
+                for (Song s : songlist) {
+                    s.setName(inApiModifyAlbumInfo.getData().getName());
+                    songMapper.updateById(s);
+                }
+            }
+        }
     }
 
     @Override
     //删除专辑
     public void deleteAlbum(InApiDeleteAlbum inApiDeleteAlbum, OutApiDeleteAlbum outApiDeleteAlbum){
+        int ok = albumMapper.deleteById(inApiDeleteAlbum.getAlbum_id());
+        if (ok == 1)
+            outApiDeleteAlbum.setCode(200);
+        else {
+            outApiDeleteAlbum.setCode(300);
+            QueryWrapper<Song> qw = new QueryWrapper<>();
+            qw.like("album_id", inApiDeleteAlbum.getAlbum_id());
+            List<Song> songlist = songMapper.selectList(qw);
+            if (songlist.size() == 0)
+                return;
+            else {
+                for (Song song : songlist) {
+                    QueryWrapper<Song> queryWrapper = new QueryWrapper<>();
+                    queryWrapper.eq("id", song.getSong_id());
+                    songMapper.delete(queryWrapper);
+                }
+            }
+        }
+    }
 
+    //管理端：获取歌手的所有专辑
+    public void getAlbumByArtist(InApiGetAlbumByArtist inApiGetAlbumByArtist,OutApiGetAlbumByArtist outApiGetAlbumByArtist){
+        QueryWrapper<Album> qw = new QueryWrapper<>();
+        qw.like("artist_id",inApiGetAlbumByArtist.getArtist_id());
+        List<Album> albumList = albumMapper.selectList(qw);
+        if (albumList.size() == 0)
+            outApiGetAlbumByArtist.setCode(300);
+        else
+            outApiGetAlbumByArtist.setCode(200);
+        outApiGetAlbumByArtist.setData(albumList);
     }
 
     @Override
@@ -84,18 +154,18 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
 
     @Override
     //分页获取歌手专辑
-    public void getAlbumByArtist(InApiGetAlbumByArtist inApiGetAlbumByArtist, OutApiGetAlbumByArtist outApiGetAlbumByArtist) {
+    public void getPageAlbumByArtist(InApiGetPageAlbumByArtist inApiGetPageAlbumByArtist, OutApiGetPageAlbumByArtist outApiGetPageAlbumByArtist) {
         QueryWrapper<Album> qw = new QueryWrapper<>();
-        qw.like("artist_id", inApiGetAlbumByArtist.getArtistId());
+        qw.like("artist_id", inApiGetPageAlbumByArtist.getArtistId());
         List<Album> albumList = albumMapper.selectList(qw);
         int total = albumList.size();
-        long totalPages = (total + inApiGetAlbumByArtist.getPageSize() - 1) / inApiGetAlbumByArtist.getPageSize();
+        long totalPages = (total + inApiGetPageAlbumByArtist.getPageSize() - 1) / inApiGetPageAlbumByArtist.getPageSize();
         if (total == 0) {
-            outApiGetAlbumByArtist.setCode(200);
+            outApiGetPageAlbumByArtist.setCode(200);
         } else {
-            outApiGetAlbumByArtist.setCode(300);
-            outApiGetAlbumByArtist.setPageTotal(String.valueOf(totalPages));//强制转换成string类型
-            outApiGetAlbumByArtist.setData(albumList);
+            outApiGetPageAlbumByArtist.setCode(300);
+            outApiGetPageAlbumByArtist.setPageTotal(String.valueOf(totalPages));//强制转换成string类型
+            outApiGetPageAlbumByArtist.setData(albumList);
         }
     }
     @Override

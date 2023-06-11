@@ -1,6 +1,7 @@
 package com.example.webmusic.controller.playlist;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.webmusic.controller.playlist.in.InApiGetHotPlaylist;
 import com.example.webmusic.controller.playlist.out.OutApi_getOnePlayList;
 import com.example.webmusic.models.playlist.PlayListSong;
 import com.example.webmusic.models.song.Song;
@@ -42,5 +43,12 @@ public class PlayListController {
         }
         out.setSongs(songs);
         return out;
+    }
+
+    @GetMapping(value = "/library/playlist/hot")
+    public OutApiGetHotPlaylist getHotPlaylist(@RequestParam InApiGetHotPlaylist inApiGetHotPlaylist){
+        OutApiGetHotPlaylist outApiGetHotPlaylist =new OutApiGetHotPlaylist();
+        playListService.getHotPlaylist(inApiGetHotPlaylist,outApiGetHotPlaylist);
+        return outApiGetHotPlaylist;
     }
 }

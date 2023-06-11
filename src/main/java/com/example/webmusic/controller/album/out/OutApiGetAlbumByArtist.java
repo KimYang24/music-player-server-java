@@ -14,9 +14,5 @@ import java.util.List;
 @NoArgsConstructor
 public class OutApiGetAlbumByArtist {
     private List<Album> data;
-    private long code;
-    /**
-     * 有多少页数据
-     */
-    private String pageTotal;
+    private int code;
 }
