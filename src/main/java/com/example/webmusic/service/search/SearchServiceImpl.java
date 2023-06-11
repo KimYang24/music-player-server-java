@@ -23,12 +23,6 @@ import java.util.List;
 @Service
 public class SearchServiceImpl implements SearchService{
 
-    @Autowired
-    private SongService songService;
-    @Autowired
-    private AlbumService albumService;
-    @Autowired
-    private ArtistService artistService;
 
     @Autowired
     private SongMapper songMapper;
