@@ -2,6 +2,7 @@ package com.example.webmusic.models.like;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,34 +18,34 @@ public class Like {
      */
     @TableId(type = IdType.AUTO)
     @JsonProperty("likeId")
-    private long like_id;
+    private Long like_id;
     /**
      * 喜欢的专辑的id
      */
     @JsonProperty("albumId")
-    private long album_id;
+    private Long album_id;
     /**
      * 喜欢的歌手的id
      */
     @JsonProperty("artistId")
-    private long artist_id;
+    private Long artist_id;
     /**
      * 喜欢的播放列表的id
      */
     @JsonProperty("playListId")
-    private long playlist_id;
+    private Long playlist_id;
     /**
      * 喜欢的歌曲的id
      */
     @JsonProperty("songId")
-    private long song_id;
+    private Long song_id;
     /**
      * 喜欢类型(1：歌曲 2：歌手 3：专辑 4：播放列表)
      */
-    private long type;
+    private Long type;
     /**
      * 喜欢的歌曲的所有者，可以通过这个所有者来遍历找到这个人所有喜欢的歌
      */
     @JsonProperty("userId")
-    private long user_id;
+    private Long user_id;
 }

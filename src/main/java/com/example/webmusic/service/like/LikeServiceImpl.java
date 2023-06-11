@@ -33,12 +33,16 @@ public class LikeServiceImpl extends ServiceImpl<LikeMapper, Like> implements Li
     public int deleteUserLike(Like like) {
         int code = 200;
         QueryWrapper<Like> qw = new QueryWrapper<>();
-        qw.eq("user_id", like.getUser_id())
-                .eq("song_id",like.getSong_id())
-                .eq("album_id",like.getAlbum_id())
-                .eq("playlist_id",like.getPlaylist_id())
-                .eq("type",like.getType())
-                .eq("artist_id",like.getArtist_id());
+        qw.eq("user_id", like.getUser_id()).eq("type",like.getType());
+        if (like.getType() == 1) {
+            qw.eq("song_id", like.getSong_id());
+        } else if (like.getType() == 2) {
+            qw.eq("artist_id", like.getArtist_id());
+        } else if (like.getType() == 3) {
+            qw.eq("album_id", like.getAlbum_id());
+        } else if (like.getType() == 4) {
+            qw.eq("playlist_id", like.getPlaylist_id());
+        }
         int result = likeMapper.delete(qw);
         if(result == 0) {
             code = 300;
