@@ -11,6 +11,7 @@ import com.example.webmusic.mapper.user.UserMapper;
 import com.example.webmusic.models.user.User;
 import com.example.webmusic.service.log.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +28,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Autowired
     private UserMapper userMapper;
     @Autowired
+    @Lazy
     private LogService logService;
 
     @Override

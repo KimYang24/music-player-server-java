@@ -33,7 +33,7 @@ public class LogServiceImppl extends ServiceImpl<LogMapper, Log> implements LogS
                 .time(new Date().toString())
                 .type(2)
                 .build();
-        User user = userService.getOne(new QueryWrapper<User>().eq("userId",inApiSaveLog.getUserId()));
+        User user = userService.getOne(new QueryWrapper<User>().eq("user_id",inApiSaveLog.getUserId()));
         Song song =songService.getOne(new QueryWrapper<Song>().eq("song_id",inApiSaveLog.getSongId()));
         log.setSongname(song.getName());
         log.setUsername(user.getUsername());
@@ -52,7 +52,7 @@ public class LogServiceImppl extends ServiceImpl<LogMapper, Log> implements LogS
                 .time(new Date().toString())
                 .type(3)
                 .build();
-        User user = userService.getOne(new QueryWrapper<User>().eq("userId",inApiSaveLog.getUserId()));
+        User user = userService.getOne(new QueryWrapper<User>().eq("user_id",inApiSaveLog.getUserId()));
         Song song =songService.getOne(new QueryWrapper<Song>().eq("song_id",inApiSaveLog.getSongId()));
         log.setSongname(song.getName());
         log.setUsername(user.getUsername());
