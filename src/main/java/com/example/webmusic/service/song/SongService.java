@@ -5,7 +5,6 @@ import com.example.webmusic.controller.song.in.*;
 import com.example.webmusic.controller.song.in.InApiAddSong;
 import com.example.webmusic.controller.song.out.*;
 import com.example.webmusic.models.song.Song;
-import io.swagger.models.auth.In;
 
 
 public interface SongService extends IService<Song> {
@@ -31,7 +30,7 @@ public interface SongService extends IService<Song> {
     void deleteSong(InApiDeleteSong inApiDeleteSong,OutApiDeleteSong outApiDeleteSong);
 
     //根据songId获取单首歌曲
-    void getOneSongById(int songID,OutApiGetOneSong out);
+    void getOneSongById(long songID,OutApiGetOneSong out);
     void getSongListByArtist(InApiGetSongsByArtist inApiGetSongsByArtist,OutApiGetSongsByArtist outApiGetSongsByArtist);
 
     //歌曲推荐；随机返回歌曲

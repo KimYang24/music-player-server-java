@@ -45,11 +45,11 @@ CREATE TABLE IF NOT EXISTS `artist` (
 
 CREATE TABLE IF NOT EXISTS `likes` (
  `like_id` INTEGER NOT NULL auto_increment,
- `user_id` INTEGER NOT NULL,
- `song_id` INTEGER NOT NULL,
- `album_id` INTEGER NOT NULL,
- `artist_id` INTEGER NOT NULL,
- `playlist_id` INTEGER NOT NULL,
+ `user_id` INTEGER ,
+ `song_id` INTEGER ,
+ `album_id` INTEGER ,
+ `artist_id` INTEGER ,
+ `playlist_id` INTEGER ,
  `type` INTEGER NOT NULL,
  PRIMARY KEY (`like_id`)
 ) ENGINE=InnoDB;
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `playlist` (
 
 CREATE TABLE IF NOT EXISTS `mv` (
  `movie_id` INTEGER NOT NULL auto_increment,
- `url` VARCHAR(255) NOT NULL,
+ `url` VARCHAR(255),
  `pic_url` VARCHAR(255),
  `duration` INTEGER COMMENT '时长',
  `movie` VARCHAR(255) NOT NULL COMMENT '名字',
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `mv` (
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `playlist_songs` (
- `id` INTEGER NOT NULL,
+ `id` INTEGER NOT NULL auto_increment,
  `song_id` INTEGER NOT NULL,
  `playlist_id` INTEGER NOT NULL,
  PRIMARY KEY (`id`)

@@ -6,12 +6,11 @@ import com.example.webmusic.controller.song.in.*;
 import com.example.webmusic.controller.song.out.*;
 import com.example.webmusic.mapper.song.SongMapper;
 import com.example.webmusic.models.song.Song;
-import com.example.webmusic.models.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 @Service
@@ -117,7 +116,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
 
     @Override
     //根据songId获取单首歌曲
-    public void getOneSongById(int songID,OutApiGetOneSong out) {
+    public void getOneSongById(long songID, OutApiGetOneSong out) {
         Song song = songMapper.selectById(songID);
         if(song != null) {
             out.setCode(200);

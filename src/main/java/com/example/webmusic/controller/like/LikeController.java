@@ -33,9 +33,10 @@ public class LikeController {
     @Autowired
     private PlayListService playListService;
     @GetMapping("/user/like")
-    public OutApi_getUserLike getUserLikes(@RequestParam("userId") int userID){
+    public OutApi_getUserLike getUserLikes(@RequestParam("userId") long userID){
         OutApi_getUserLike out = new OutApi_getUserLike();
         List<Like> likeList = likeService.getUserLike(userID);
+        System.out.println("likeList.size() = " + likeList.size());
         List<Song> songs = new ArrayList<>();
         List<Artist> artists = new ArrayList<>();
         List<Album> albums = new ArrayList<>();

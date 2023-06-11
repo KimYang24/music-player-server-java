@@ -11,9 +11,6 @@ import com.example.webmusic.mapper.song.SongMapper;
 import com.example.webmusic.models.album.Album;
 import com.example.webmusic.models.artist.Artist;
 import com.example.webmusic.models.song.Song;
-import com.example.webmusic.service.album.AlbumService;
-import com.example.webmusic.service.artist.ArtistService;
-import com.example.webmusic.service.song.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -37,19 +37,19 @@ public class ArtistController {
 //        return outApiGetArtistDescribe;
 //    }
 
-//    //获取对应筛选条件歌手
-//    @GetMapping("/library/artist")
-//    public OutApi_getSelectedArtist getSelectedArtist(@ModelAttribute InApi_getSelectedArtist in) {
-//        OutApi_getSelectedArtist out = new OutApi_getSelectedArtist();
-//        artistService.getArtistByCon(in,out);
-//        return out;
-//    }
+    //获取对应筛选条件歌手
+    @GetMapping("/library/artist")
+    public OutApi_getSelectedArtist getSelectedArtist(@ModelAttribute InApi_getSelectedArtist in) {
+        OutApi_getSelectedArtist out = new OutApi_getSelectedArtist();
+        artistService.getArtistByCon(in,out);
+        return out;
+    }
 //
-//    //歌手推荐，随机返回30个歌手
-//    @GetMapping("/discover/artist")
-//    public OutApi_getRecommendArtist getRecommendArtist() {
-//        OutApi_getRecommendArtist out = new OutApi_getRecommendArtist();
-//        artistService.getRandomArtist(out);
-//        return out;
-//    }
+    //歌手推荐，随机返回30个歌手
+    @GetMapping("/discover/artist")
+    public OutApi_getRecommendArtist getRecommendArtist() {
+        OutApi_getRecommendArtist out = new OutApi_getRecommendArtist();
+        artistService.getRandomArtist(out);
+        return out;
+    }
 }

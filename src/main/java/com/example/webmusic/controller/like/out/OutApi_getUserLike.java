@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OutApi_getUserLike {
-    int code;
+    long code;
     List<Song> songs;
     List<Album> albums;
     List<Artist> artists;

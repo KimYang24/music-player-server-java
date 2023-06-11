@@ -7,11 +7,11 @@ import com.example.webmusic.models.user.User;
 
 public interface LogService extends IService<Log> {
 
-    public long savePlayLog(InApiSaveLog inApiSaveLog);
+    long savePlayLog(InApiSaveLog inApiSaveLog);
 
-    public long saveDownloadLog(InApiSaveLog inApiSaveLog);
+    long saveDownloadLog(InApiSaveLog inApiSaveLog);
 
-    public long saveRegisterLog(User user);
+    long saveRegisterLog(User user);
 
 
 }
