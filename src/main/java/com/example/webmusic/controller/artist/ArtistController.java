@@ -1,8 +1,6 @@
 package com.example.webmusic.controller.artist;
 
 import com.example.webmusic.controller.album.out.OutApiGetAlbumByArtist;
-import com.example.webmusic.controller.artist.in.InApiArtistDetail;
-import com.example.webmusic.controller.artist.in.InApiGetArtistDescribe;
 import com.example.webmusic.controller.artist.in.InApi_getSelectedArtist;
 import com.example.webmusic.controller.artist.out.OutApiArtistDetail;
 import com.example.webmusic.controller.artist.out.OutApiGetArtistDescribe;
@@ -22,22 +20,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArtistController {
     @Autowired
     private ArtistService artistService;
-
+    // TODO 不要没测试过就推上来!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //获取歌手详情页
     @GetMapping(value = "/detail/artist")
-    public OutApiArtistDetail artistDetail(@RequestParam InApiArtistDetail inApiArtistDetail){
+    public OutApiArtistDetail artistDetail(@RequestParam(value = "artistId") long artistId){
         OutApiArtistDetail outApiArtistDetail=new OutApiArtistDetail();
-        artistService.artistDetail(inApiArtistDetail,outApiArtistDetail);
+        artistService.artistDetail(artistId,outApiArtistDetail);
         return outApiArtistDetail;
     }
-
+    // TODO 不要没测试过就推上来!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //获取歌手描述
-    @GetMapping(value = "/detail/artist/describe")
-    public OutApiGetArtistDescribe outApiGetArtistDescribe(@RequestParam InApiGetArtistDescribe inApiGetArtistDescribe){
-        OutApiGetArtistDescribe outApiGetArtistDescribe=new OutApiGetArtistDescribe();
-        artistService.getArtistDescribe(inApiGetArtistDescribe,outApiGetArtistDescribe);
-        return outApiGetArtistDescribe;
-    }
+//    @GetMapping(value = "/detail/artist/describe")
+//    public OutApiGetArtistDescribe outApiGetArtistDescribe(@RequestParam InApiGetArtistDescribe inApiGetArtistDescribe){
+//        OutApiGetArtistDescribe outApiGetArtistDescribe=new OutApiGetArtistDescribe();
+//        artistService.getArtistDescribe(inApiGetArtistDescribe,outApiGetArtistDescribe);
+//        return outApiGetArtistDescribe;
+//    }
 
     //获取对应筛选条件歌手
     @GetMapping("/library/artist")
@@ -46,7 +44,7 @@ public class ArtistController {
         artistService.getArtistByCon(in,out);
         return out;
     }
-
+//
     //歌手推荐，随机返回30个歌手
     @GetMapping("/discover/artist")
     public OutApi_getRecommendArtist getRecommendArtist() {

@@ -1,6 +1,6 @@
-package com.example.webmusic.controller.song.out;
+package com.example.webmusic.controller.mv.out;
 
-import com.example.webmusic.models.song.Song;
+import com.example.webmusic.models.mv.Mv;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +12,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OutApiGetPageSong {
-    private List<Song> data;
+public class OutApiGetAllMv {
     private long code;
-    private long totals;
+    List<Mv> mvs;
 }

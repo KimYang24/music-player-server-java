@@ -13,6 +13,7 @@ import lombok.Data;
 public class Log {
     @TableId(type = IdType.AUTO)
     private long log_id;
+
     private Long song_id;
     /**
      * 歌曲名
@@ -26,9 +27,10 @@ public class Log {
      * 1为注册2为播放3为下载
      */
     private long type;
-    private Long user_id;
+    private long user_id;
     /**
      * 用户名
      */
     private String username;
+
 }

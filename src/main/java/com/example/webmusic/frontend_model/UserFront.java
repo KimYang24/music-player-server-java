@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class UserFront {
     private String age;
     private String email;
@@ -17,6 +15,5 @@ public class UserFront {
     private String nickname;
     private String phone;
     private String picUrl;
-    private Long userId;
     private String username;
 }

@@ -3,11 +3,7 @@ package com.example.webmusic.service.album;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.webmusic.controller.album.in.*;
 import com.example.webmusic.controller.album.out.*;
-import com.example.webmusic.controller.song.in.InApiGetSongsByArtist;
-import com.example.webmusic.controller.song.out.OutApiDeleteSong;
-import com.example.webmusic.controller.album.out.*;
 import com.example.webmusic.controller.song.out.OutApiGetPageSong;
-import com.example.webmusic.controller.song.out.OutApiGetSongsByArtist;
 import com.example.webmusic.models.album.Album;
 
 public interface AlbumService extends IService<Album> {

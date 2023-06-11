@@ -2,10 +2,8 @@ package com.example.webmusic.service.like;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.webmusic.controller.like.out.OutApi_getUserLike;
 import com.example.webmusic.mapper.like.LikeMapper;
 import com.example.webmusic.models.like.Like;
-import com.example.webmusic.models.song.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +14,7 @@ public class LikeServiceImpl extends ServiceImpl<LikeMapper, Like> implements Li
     @Autowired
     private LikeMapper likeMapper;
     @Override
-    public List<Like> getUserLike(int userID) {
+    public List<Like> getUserLike(long userID) {
         QueryWrapper<Like> qw = new QueryWrapper<>();
         qw.eq("user_id",userID);
         return likeMapper.selectList(qw);

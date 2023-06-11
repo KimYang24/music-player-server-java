@@ -567,8 +567,22 @@ DELETE FROM `likes`;
 -- 正在导出表  forlijianwen.log 的数据：~0 rows (大约)
 DELETE FROM `log`;
 
--- 正在导出表  forlijianwen.mv 的数据：~0 rows (大约)
+-- 正在导出表  music.mv 的数据：~13 rows (大约)
 DELETE FROM `mv`;
+INSERT INTO `mv` (`movie_id`, `url`, `pic_url`, `duration`, `movie`, `artist`) VALUES
+	(1, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/1.mp4', NULL, 0, '極楽浄土', 'GARNiDELiA'),
+	(2, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/2.mp4', NULL, 0, 'Stay', 'Justin Bieber'),
+	(3, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/3.mp4', NULL, 0, '玫瑰少年', '五月天'),
+	(4, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/4.mp4', NULL, 0, '兰亭序', '周杰伦'),
+	(5, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/5.mp4', NULL, 0, '反方向的钟', '周杰伦'),
+	(6, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/6.mp4', NULL, 0, '夜曲', '周杰伦'),
+	(7, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/7.mp4', NULL, 0, '搁浅', '周杰伦'),
+	(8, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/8.mp4', NULL, 0, '晴天', '周杰伦'),
+	(9, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/9.mp4', NULL, 0, '稻香', '周杰伦'),
+	(10, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/10.mp4', NULL, 0, '说好的幸福呢', '周杰伦'),
+	(11, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/11.mp4', NULL, 0, '我好想你', '苏打绿'),
+	(12, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/12.mp4', NULL, 0, '天外来物', '薛之谦'),
+	(13, 'https://web-music-player.oss-cn-guangzhou.aliyuncs.com/mv/13.mp4', NULL, 0, '孤勇者', '陈奕迅');
 
 -- 正在导出表  forlijianwen.playlist 的数据：~0 rows (大约)
 DELETE FROM `playlist`;

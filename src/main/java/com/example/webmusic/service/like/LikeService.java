@@ -6,7 +6,7 @@ import com.example.webmusic.models.like.Like;
 import java.util.List;
 
 public interface LikeService extends IService<Like> {
-    List<Like> getUserLike(int userID);
+    List<Like> getUserLike(long userID);
     int addUserLike(Like like);
     int deleteUserLike(Like like);
 }

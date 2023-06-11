@@ -34,7 +34,8 @@ public class Artist {
     /**
      * 歌手的地区
      */
-    private String location;
+    private long location;
+    @JsonProperty("artist")
     private String name;
     /**
      * 歌手照片

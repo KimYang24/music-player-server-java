@@ -16,4 +16,6 @@ public interface UserService extends IService<User> {
     int modifyUserInfo(User user);
     int deleteUserInfo(int userID);
     int updateUserPic(int userID, MultipartFile file);
+    void getUserProfile(long userId,OutApiGetUserProfile outApiGetUserProfile);
+
 }

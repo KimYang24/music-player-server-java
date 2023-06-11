@@ -1,5 +1,6 @@
-package com.example.webmusic.controller.song.out;
+package com.example.webmusic.controller.song.in;
 
+import com.example.webmusic.frontend_model.SongFront;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OutApiDeleteSong {
-    private int code;
+public class InApiModiSong {
+    private SongFront data;
 }
