@@ -1,5 +1,6 @@
-package com.example.webmusic.controller.user.out.AdminUser;
+package com.example.webmusic.controller.artist.out;
 
+import com.example.webmusic.models.artist.Artist;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,8 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OutApi_adminLogin {
+public class OutApi_getArtistByAlbum {
     int code;
-    String token;
-    int adminId;
+    Artist data;
 }

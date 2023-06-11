@@ -19,7 +19,9 @@ import com.example.webmusic.utils.oss.UploadFile;
 import com.example.webmusic.utils.jwt.JwtUtil;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -79,7 +81,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             updateById(user);
             //发送注册日志
             logService.saveRegisterLog(user);
-            outApiRegister.setToken("123123213");
+            String token = JwtUtil.generateToken(user.getUser_id());
+            outApiRegister.setToken(token);
             outApiRegister.setUserId(id);
         } else{
             //手机号已存在

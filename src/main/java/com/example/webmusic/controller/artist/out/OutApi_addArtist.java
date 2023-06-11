@@ -1,6 +1,6 @@
-package com.example.webmusic.controller.user.out.AdminUser;
+package com.example.webmusic.controller.artist.out;
 
-import com.example.webmusic.models.user.AdminUser;
+import com.example.webmusic.models.artist.Artist;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +12,9 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OutApi_getAdminUserInfo {
+public class OutApi_addArtist {
     int code;
-    List<AdminUser> data;
+    long currentPage;
+    long totals;
+    List<Artist> data;
 }

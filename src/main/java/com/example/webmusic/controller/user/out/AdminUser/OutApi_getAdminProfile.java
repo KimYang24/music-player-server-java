@@ -8,5 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @AllArgsConstructor
-public class OutApi_editAdminUserInfo {
+@NoArgsConstructor
+public class OutApi_getAdminProfile {
+    int code;
+    String adminName;
 }

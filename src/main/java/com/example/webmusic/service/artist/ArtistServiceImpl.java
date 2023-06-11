@@ -5,14 +5,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.webmusic.controller.artist.out.OutApiArtistDetail;
-import com.example.webmusic.controller.artist.out.OutApiGetArtistDescribe;
+import com.example.webmusic.controller.artist.out.*;
 import com.example.webmusic.controller.artist.in.InApi_getSelectedArtist;
-import com.example.webmusic.controller.artist.out.OutApi_getRecommendArtist;
-import com.example.webmusic.controller.artist.out.OutApi_getSelectedArtist;
 import com.example.webmusic.mapper.artist.ArtistMapper;
 import com.example.webmusic.models.artist.Artist;
 import com.example.webmusic.models.song.Song;
+import com.example.webmusic.models.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -76,5 +74,68 @@ public class ArtistServiceImpl extends ServiceImpl<ArtistMapper, Artist> impleme
             outApiGetArtistDescribe.setCode(300);
             outApiGetArtistDescribe.setProfile(artists.getProfile());
         }
+    }
+
+    @Override
+    public void getPageArtist(int pagenum, int pagesize, OutApi_getPageArtist out) {
+        Page<Artist> page = new Page<>(pagenum, pagesize);
+        // 执行分页查询，使用 IPage<User> 接收分页结果
+        IPage<Artist> artistPage = artistMapper.selectPage(page, null);
+        List<Artist> artistlist = artistPage.getRecords();
+        long totals = artistPage.getTotal();
+        out.setData(artistlist);
+        out.setCode(200);
+        out.setTotals(totals);
+    }
+
+    @Override
+    public void getArtist(String name,OutApi_getArtist out) {
+        QueryWrapper<Artist> qw = new QueryWrapper<>();
+        qw.like("name",name);
+        List<Artist> artistlist = artistMapper.selectList(qw);
+        if (artistlist.size() == 0)
+            out.setCode(300);
+        else
+            out.setCode(200);
+        out.setData(artistlist);
+    }
+
+    @Override
+    public void addArtist(Artist artist, OutApi_addArtist out) {
+        int result = artistMapper.insert(artist);
+        if(result == 0){
+            out.setCode(300);
+            return;
+        }
+        int totals = artistMapper.selectCount(null);
+        int totalPages = totals % 10 == 0 ? totals / 10 : totals / 10 + 1;
+        IPage<Artist> page = new Page<>(totalPages, 10);
+        List<Artist> artistlist = artistMapper.selectPage(page, null).getRecords();
+        out.setData(artistlist);
+        out.setCode(200);
+        out.setCurrentPage(totalPages);
+        out.setTotals(totals);
+    }
+
+    @Override
+    public int deleteArtist(int artistID) {
+        int code;
+        int ok = artistMapper.deleteById(artistID);
+        if (ok == 1)
+            code = 200;
+        else
+            code = 300;
+        return code;
+    }
+
+    @Override
+    public int modifyArtist(Artist artist) {
+        int code;
+        int ok = artistMapper.updateById(artist);
+        if (ok == 1)
+            code = 200;
+        else
+            code = 300;
+        return code;
     }
 }
