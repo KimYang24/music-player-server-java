@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.webmusic.controller.search.In.InApiSearchByKeyword;
+import com.example.webmusic.controller.search.out.OutApiGetSwipers;
 import com.example.webmusic.controller.search.out.OutApiSearchAlbums;
 import com.example.webmusic.controller.search.out.OutApiSearchArtists;
 import com.example.webmusic.controller.search.out.OutApiSearchSongs;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 public class SearchServiceImpl implements SearchService{
@@ -89,5 +91,39 @@ public class SearchServiceImpl implements SearchService{
         outApiSearchSongs.setPageTotal(pageTotal);
         outApiSearchSongs.setCode(200);
         outApiSearchSongs.setSongs(songList);
+    }
+
+    //轮播图推荐
+    public List getSwipers(OutApiGetSwipers outApiGetSwipers){
+        //随机返回3个歌手、专辑、歌曲
+        List<Song> songs = songMapper.selectList(new QueryWrapper<Song>().orderByAsc("rand()").last("limit 3"));
+        List<Album> albums = albumMapper.selectList(new QueryWrapper<Album>().orderByAsc("rand()").last("limit 3"));
+        List<Artist> artists = artistMapper.selectList(new QueryWrapper<Artist>().orderByAsc("rand()").last("limit 3"));
+        List<OutApiGetSwipers> banner=new ArrayList<>();
+        for (Album album : albums) {
+            OutApiGetSwipers targetdata = new OutApiGetSwipers();
+            targetdata.setTargetTitle(album.getName());
+            targetdata.setTargetType(1);
+            targetdata.setTargetId(album.getAlbum_id());
+            targetdata.setCode(200);
+            banner.add(targetdata);
+        }
+        for (Artist artist : artists) {
+            OutApiGetSwipers targetdata = new OutApiGetSwipers();
+            targetdata.setTargetTitle(artist.getName());
+            targetdata.setTargetType(1);
+            targetdata.setTargetId(artist.getArtist_id());
+            targetdata.setCode(200);
+            banner.add(targetdata);
+        }
+        for (Song song : songs) {
+            OutApiGetSwipers targetdata = new OutApiGetSwipers();
+            targetdata.setTargetTitle(song.getName());
+            targetdata.setTargetType(1);
+            targetdata.setTargetId(song.getAlbum_id());
+            targetdata.setCode(200);
+            banner.add(targetdata);
+        }
+        return banner;
     }
 }

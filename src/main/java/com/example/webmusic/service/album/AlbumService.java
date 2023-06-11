@@ -12,13 +12,13 @@ import com.example.webmusic.models.album.Album;
 
 public interface AlbumService extends IService<Album> {
     //获取特定页专辑
-    void getPageAlbum(InApiGetPageAlbum inApiGetPageAlbum, OutApiGetPageSong outApiGetPageSong);
+    void getPageAlbum(InApiGetPageAlbum inApiGetPageAlbum, OutApiGetPageAlbum outApiGetPageAlbum);
 
     //获取特定专辑
     void getAlbum(InApiGetAlbum inApiGetAlbum, OutApiGetAlbum outApiGetAlbum);
 
     //添加专辑
-    void addAlbum(InApiAddAlbum inApiAddAlbum, OutApiAddAlbum outApiAddAlbum);
+    void addAlbum(Album album, OutApiAddAlbum outApiAddAlbum);
 
     //修改专辑信息
     void modifyAlbumInfo(InApiModifyAlbumInfo inApiModifyAlbumInfo, OutApiModifyAlbum outApiModifyAlbumInfo);
@@ -32,5 +32,9 @@ public interface AlbumService extends IService<Album> {
     //专辑详情页
     void albumDetail(InApiAlbumDetail inApiAlbumDetail, OutApiAlbumDetail outApiAlbumDetail);
 
+    //分页获取歌手专辑
+    void getPageAlbumByArtist(InApiGetPageAlbumByArtist inApiGetPageAlbumByArtist,OutApiGetPageAlbumByArtist outApiGetPageAlbumByArtist);
+
+    //根据歌手获取专辑
     void getAlbumByArtist(InApiGetAlbumByArtist inApiGetAlbumByArtist, OutApiGetAlbumByArtist outApiGetAlbumByArtist);
 }

@@ -2,6 +2,7 @@ package com.example.webmusic.controller.search;
 
 
 import com.example.webmusic.controller.search.In.InApiSearchByKeyword;
+import com.example.webmusic.controller.search.out.OutApiGetSwipers;
 import com.example.webmusic.controller.search.out.OutApiSearchAlbums;
 import com.example.webmusic.controller.search.out.OutApiSearchArtists;
 import com.example.webmusic.controller.search.out.OutApiSearchSongs;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class SearchController {
@@ -71,5 +74,10 @@ public class SearchController {
         OutApiSearchAlbums outApiSearchAlbums = new OutApiSearchAlbums();
         searchService.searchAlbumsByKeyword(inApiSearchByKeyword,outApiSearchAlbums);
         return outApiSearchAlbums;
+    }
+    @GetMapping(value = "/discover/swiper")
+    public List<OutApiSearchAlbums> getSwipers(){
+        OutApiGetSwipers outApiGetSwipers=new OutApiGetSwipers();
+        return searchService.getSwipers(outApiGetSwipers);
     }
 }
