@@ -25,8 +25,8 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
 
     @Override
     //获取特定页专辑
-    public void getPageAlbum(InApiGetPageAlbum inApiGetPageAlbum, OutApiGetPageAlbum outApiGetPageAlbum){
-        Page<Album> page = new Page<>(inApiGetPageAlbum.getCurrentPage(), inApiGetPageAlbum.getPageSize());
+    public void getPageAlbum(long currentPage ,long pageSize, OutApiGetPageAlbum outApiGetPageAlbum){
+        Page<Album> page = new Page<>(currentPage,pageSize);
         // 执行分页查询，使用 IPage<User> 接收分页结果
 
         IPage<Album> albumPage = albumMapper.selectPage(page, null);
@@ -39,15 +39,18 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
 
     @Override
     //获取特定专辑
-    public void getAlbum(InApiGetAlbum inApiGetAlbum, OutApiGetAlbum outApiGetAlbum){
+    public void getAlbum(String albumName, OutApiGetAlbum outApiGetAlbum){
         QueryWrapper<Album> qw = new QueryWrapper<>();
-        qw.like("albumName",inApiGetAlbum.getAlbumName());
+        qw.like("albumName",albumName);
         List<Album> albumList = albumMapper.selectList(qw);
-        if (albumList.size() == 0)
+        if (albumList.size() == 0){
             outApiGetAlbum.setCode(300);
-        else
+            return;
+        }
+        else{
             outApiGetAlbum.setCode(200);
-        outApiGetAlbum.setData(albumList);
+            outApiGetAlbum.setData(albumList);
+        }
     }
 
     @Override
@@ -100,14 +103,14 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
 
     @Override
     //删除专辑
-    public void deleteAlbum(InApiDeleteAlbum inApiDeleteAlbum, OutApiDeleteAlbum outApiDeleteAlbum){
-        int ok = albumMapper.deleteById(inApiDeleteAlbum.getAlbum_id());
+    public void deleteAlbum(long albumId, OutApiDeleteAlbum outApiDeleteAlbum){
+        int ok = albumMapper.deleteById(albumId);
         if (ok == 1)
             outApiDeleteAlbum.setCode(200);
         else {
             outApiDeleteAlbum.setCode(300);
             QueryWrapper<Song> qw = new QueryWrapper<>();
-            qw.like("album_id", inApiDeleteAlbum.getAlbum_id());
+            qw.like("album_id", albumId);
             List<Song> songlist = songMapper.selectList(qw);
             if (songlist.size() == 0)
                 return;
@@ -122,9 +125,9 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
     }
 
     //管理端：获取歌手的所有专辑
-    public void getAlbumByArtist(InApiGetAlbumByArtist inApiGetAlbumByArtist,OutApiGetAlbumByArtist outApiGetAlbumByArtist){
+    public void getAlbumByArtist(long artistId,OutApiGetAlbumByArtist outApiGetAlbumByArtist){
         QueryWrapper<Album> qw = new QueryWrapper<>();
-        qw.like("artist_id",inApiGetAlbumByArtist.getArtist_id());
+        qw.like("artist_id",artistId);
         List<Album> albumList = albumMapper.selectList(qw);
         if (albumList.size() == 0)
             outApiGetAlbumByArtist.setCode(300);
@@ -135,11 +138,11 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
 
     @Override
     //专辑详情页
-    public void albumDetail(InApiAlbumDetail inApiAlbumDetail, OutApiAlbumDetail outApiAlbumDetail){
+    public void albumDetail(long albumId, OutApiAlbumDetail outApiAlbumDetail){
         QueryWrapper<Album> qw=new QueryWrapper<>();
         QueryWrapper<Song> qww=new QueryWrapper<>();
-        qw.like("album_id",inApiAlbumDetail.getAlbumId());
-        qww.like("album_id",inApiAlbumDetail.getAlbumId());
+        qw.like("album_id",albumId);
+        qww.like("album_id",albumId);
         List<Album> albumList=albumMapper.selectList(qw);
         List<Song> songList=songMapper.selectList(qww);
         if(albumList.size()==0){
@@ -154,12 +157,12 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
 
     @Override
     //分页获取歌手专辑
-    public void getPageAlbumByArtist(InApiGetPageAlbumByArtist inApiGetPageAlbumByArtist, OutApiGetPageAlbumByArtist outApiGetPageAlbumByArtist) {
+    public void getPageAlbumByArtist(long artistId,long currentPage,long pageSize, OutApiGetPageAlbumByArtist outApiGetPageAlbumByArtist) {
         QueryWrapper<Album> qw = new QueryWrapper<>();
-        qw.like("artist_id", inApiGetPageAlbumByArtist.getArtistId());
+        qw.like("artist_id",artistId);
         List<Album> albumList = albumMapper.selectList(qw);
         int total = albumList.size();
-        long totalPages = (total + inApiGetPageAlbumByArtist.getPageSize() - 1) / inApiGetPageAlbumByArtist.getPageSize();
+        long totalPages = (total + pageSize - 1) / pageSize;
         if (total == 0) {
             outApiGetPageAlbumByArtist.setCode(200);
         } else {

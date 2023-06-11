@@ -8,5 +8,5 @@ import com.example.webmusic.models.playlist.PlayList;
 
 public interface PlayListService extends IService<PlayList> {
     void getOnePlayListById(int playListID, OutApi_getOnePlayList out);
-    void getHotPlaylist(InApiGetHotPlaylist inApiGetHotPlaylist, OutApiGetHotPlaylist outApiGetHotPlaylist);
+    void getHotPlaylist(int currentPage,int pageSize, OutApiGetHotPlaylist outApiGetHotPlaylist);
 }

@@ -41,9 +41,9 @@ public class PlayListServiceImpl extends ServiceImpl<PlayListMapper, PlayList> i
         out.setPlaylist(playList);
     }
 
-    public void getHotPlaylist(InApiGetHotPlaylist inApiGetHotPlaylist, OutApiGetHotPlaylist outApiGetHotPlaylist){
+    public void getHotPlaylist(int currentPage,int pageSize, OutApiGetHotPlaylist outApiGetHotPlaylist){
         //获取指定页码的歌单列表
-        List<PlayList> playlists = PlaylistMapper.getPlaylistsByPage(inApiGetHotPlaylist.getCurrentPage(), inApiGetHotPlaylist.getPageSize());
+        List<PlayList> playlists = PlaylistMapper.getPlaylistsByPage(currentPage,pageSize);
         // 随机获取一个歌单
         int randomIndex = new Random().nextInt(playlists.size());
         outApiGetHotPlaylist.setData(playlists.get(randomIndex));

@@ -28,7 +28,7 @@ public class ArtistController {
 
     //获取歌手描述
     @GetMapping(value = "/detail/artist/describe")
-    public OutApiGetArtistDescribe outApiGetArtistDescribe(@RequestParam (value = "artistId") int artistId){
+    public OutApiGetArtistDescribe outApiGetArtistDescribe(@RequestParam (value = "artistId") long artistId){
         OutApiGetArtistDescribe outApiGetArtistDescribe=new OutApiGetArtistDescribe();
         artistService.getArtistDescribe(artistId,outApiGetArtistDescribe);
         return outApiGetArtistDescribe;

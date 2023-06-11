@@ -65,7 +65,7 @@ public class ArtistServiceImpl extends ServiceImpl<ArtistMapper, Artist> impleme
             outApiArtistDetail.setArtistDetail(artist);
         }
     }
-    public void getArtistDescribe(int artistId, OutApiGetArtistDescribe outApiGetArtistDescribe){
+    public void getArtistDescribe(long artistId, OutApiGetArtistDescribe outApiGetArtistDescribe){
         QueryWrapper<Artist> qw=new QueryWrapper<>();
         qw.like("artist_id",artistId);
         Artist artists=artistMapper.selectOne(qw);//选一个,选列表用selectList

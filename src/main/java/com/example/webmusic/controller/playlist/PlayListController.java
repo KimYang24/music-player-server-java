@@ -46,9 +46,10 @@ public class PlayListController {
     }
 
     @GetMapping(value = "/library/playlist/hot")
-    public OutApiGetHotPlaylist getHotPlaylist(@RequestParam InApiGetHotPlaylist inApiGetHotPlaylist){
+    public OutApiGetHotPlaylist getHotPlaylist(@RequestParam ("currentPage")int currentPage,
+                                               @RequestParam("pageSize")int pageSize){
         OutApiGetHotPlaylist outApiGetHotPlaylist =new OutApiGetHotPlaylist();
-        playListService.getHotPlaylist(inApiGetHotPlaylist,outApiGetHotPlaylist);
+        playListService.getHotPlaylist(currentPage,pageSize,outApiGetHotPlaylist);
         return outApiGetHotPlaylist;
     }
 }
