@@ -2,9 +2,7 @@ package com.example.webmusic.controller.search;
 
 
 import com.example.webmusic.controller.search.In.InApiSearchByKeyword;
-import com.example.webmusic.controller.search.out.OutApiSearchAlbums;
-import com.example.webmusic.controller.search.out.OutApiSearchArtists;
-import com.example.webmusic.controller.search.out.OutApiSearchSongs;
+import com.example.webmusic.controller.search.out.*;
 import com.example.webmusic.service.search.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +17,17 @@ public class SearchController {
 
     //未输入时显示热搜信息
     @GetMapping(value = "/search/hot")
-    public void showHot(){
-
+    public OutApiSearchHot showHot(OutApiSearchHot outApiSearchHot){
+        searchService.searchHot(outApiSearchHot);
+        return outApiSearchHot;
     }
 
     //动态搜索推荐
     @GetMapping(value = "/search/suggest")
-    public void hotByKeyword(@RequestParam String keywords){
-
+    public OutApiHotByKeyword hotByKeyword(@RequestParam(value = "keywords") String keywords){
+        OutApiHotByKeyword outApiHotByKeyword = OutApiHotByKeyword.builder().build();
+        searchService.searchHotByKeyWord(keywords,outApiHotByKeyword);
+        return outApiHotByKeyword;
     }
 
     //关键词搜索歌曲
@@ -37,6 +38,7 @@ public class SearchController {
         InApiSearchByKeyword inApiSearchByKeyword = InApiSearchByKeyword.builder()
                 .currentPage(pageSize)
                 .keyWord(keyWord)
+                .currentPage(currentPage)
                 .pageSize(pageSize).build();
         OutApiSearchSongs outApiSearchSongs = new OutApiSearchSongs();
         searchService.searchSongsByKeyword(inApiSearchByKeyword,outApiSearchSongs);
@@ -52,6 +54,7 @@ public class SearchController {
         InApiSearchByKeyword inApiSearchByKeyword = InApiSearchByKeyword.builder()
                 .currentPage(pageSize)
                 .keyWord(keyWord)
+                .currentPage(currentPage)
                 .pageSize(pageSize).build();
         OutApiSearchArtists outApiSearchArtists = new OutApiSearchArtists();
         searchService.searchArtistsByKeyword(inApiSearchByKeyword,outApiSearchArtists);
@@ -67,6 +70,7 @@ public class SearchController {
         InApiSearchByKeyword inApiSearchByKeyword = InApiSearchByKeyword.builder()
                 .currentPage(pageSize)
                 .keyWord(keyWord)
+                .currentPage(currentPage)
                 .pageSize(pageSize).build();
         OutApiSearchAlbums outApiSearchAlbums = new OutApiSearchAlbums();
         searchService.searchAlbumsByKeyword(inApiSearchByKeyword,outApiSearchAlbums);
