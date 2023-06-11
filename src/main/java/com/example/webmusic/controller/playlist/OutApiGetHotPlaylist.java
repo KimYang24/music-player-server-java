@@ -1,6 +1,6 @@
-package com.example.webmusic.controller.album.out;
+package com.example.webmusic.controller.playlist;
 
-import com.example.webmusic.models.album.Album;
+import com.example.webmusic.models.playlist.PlayList;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +12,9 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OutApiGetPageAlbum {//
+public class OutApiGetHotPlaylist {//获取热门歌单
+    PlayList data;
     private int code;
-    private long totals;
-    private List<Album> data;
+    private int pageTotal;
+
 }
