@@ -55,6 +55,7 @@ public class UserController {
         return out;
     }
 
+    //添加用户信息
     @PostMapping("/User/addInfo")
     public OutApi_addUserInfo addUserInfo(@RequestBody User user) {
         OutApi_addUserInfo out = new OutApi_addUserInfo();

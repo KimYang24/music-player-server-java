@@ -82,4 +82,7 @@ public class LikeController {
         m.put("code",code);
         return m;
     }
+
+    //获得所有
+    //
 }
