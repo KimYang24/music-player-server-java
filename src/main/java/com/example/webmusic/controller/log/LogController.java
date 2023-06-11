@@ -1,11 +1,10 @@
 package com.example.webmusic.controller.log;
 
 import com.example.webmusic.controller.log.in.InApiSaveLog;
+import com.example.webmusic.controller.log.out.OutApiManaLog;
 import com.example.webmusic.service.log.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,5 +29,13 @@ public class LogController {
         Map<String,Object> map = new HashMap<>();
         map.put("code",code);
         return map;
+    }
+
+    //管理端根据type获取日志
+    @GetMapping(value = "/admin/getLog")
+    public OutApiManaLog getLogByType(@RequestParam(value = "type") long type){
+        OutApiManaLog outApiManaLog= OutApiManaLog.builder().build();
+        logService.getLogByType(type,outApiManaLog);
+        return outApiManaLog;
     }
 }

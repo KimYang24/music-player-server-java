@@ -15,5 +15,5 @@ import java.util.List;
 @NoArgsConstructor
 public class OutApiGetSong {
     private List<Song> data;
-    private int code;
+    private long code;
 }

@@ -14,6 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 public class OutApiGetPageSong {
     private List<Song> data;
-    private int code;
-    private long total;
+    private long code;
+    private long totals;
 }
