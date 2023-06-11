@@ -16,5 +16,5 @@ public interface ArtistService extends IService<Artist> {
     void getArtistByCon(InApi_getSelectedArtist in, OutApi_getSelectedArtist out);
 
     void getRandomArtist(OutApi_getRecommendArtist out);
-    void getArtistDescribe(long artistId, OutApiGetArtistDescribe outApiGetArtistDescribe);
+    void getArtistDescribe(int artistId, OutApiGetArtistDescribe outApiGetArtistDescribe);
 }
