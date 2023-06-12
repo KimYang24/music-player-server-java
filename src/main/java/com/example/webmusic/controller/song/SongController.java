@@ -92,9 +92,12 @@ public class SongController {
     }
     //分页获取歌手歌曲
     @GetMapping(value = "/detail/artist/songs")
-    public OutApiGetSongsByArtist outApiGetSongsByArtist(@RequestParam InApiGetSongsByArtist inApiGetSongsByArtist){
+    public OutApiGetSongsByArtist outApiGetSongsByArtist(@RequestParam ("artistId")long artistId,
+                                                         @RequestParam("order")String order,
+                                                         @RequestParam("currentPage")long currentPage,
+                                                         @RequestParam("pageSize")long pageSize){
         OutApiGetSongsByArtist outApiGetSongsByArtist=new OutApiGetSongsByArtist();
-        songService.getSongListByArtist(inApiGetSongsByArtist,outApiGetSongsByArtist);
+        songService.getSongListByArtist(artistId,order,currentPage,pageSize,outApiGetSongsByArtist);
         return outApiGetSongsByArtist;
     }
 

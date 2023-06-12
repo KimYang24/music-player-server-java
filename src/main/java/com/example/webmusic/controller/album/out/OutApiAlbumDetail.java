@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OutApiAlbumDetail {//专辑详情页
-    private List<Album> albums;
+    private Album album;
     private List<Song> songs;
     private int code;
 }

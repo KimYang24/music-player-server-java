@@ -132,12 +132,12 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
     }
 
     @Override
-    public void getSongListByArtist(InApiGetSongsByArtist inApiGetSongsByArtist,OutApiGetSongsByArtist outApiGetSongsByArtist){
+    public void getSongListByArtist(long artistId,String order,long currentPage,long pageSize,OutApiGetSongsByArtist outApiGetSongsByArtist){
         QueryWrapper<Song> qw = new QueryWrapper<>();
-        qw.like("artist_id",inApiGetSongsByArtist.getArtistId());
+        qw.like("artist_id",artistId);
         List<Song> songList = songMapper.selectList(qw);
         int total = songList.size();
-        long totalPages = (total + inApiGetSongsByArtist.getPageSize() - 1) / inApiGetSongsByArtist.getPageSize();
+        long totalPages = (total + pageSize - 1) / pageSize;
         if(total ==0){
             outApiGetSongsByArtist.setCode(200);
         }

@@ -56,22 +56,20 @@ public class ArtistServiceImpl extends ServiceImpl<ArtistMapper, Artist> impleme
     public void artistDetail(long artistId, OutApiArtistDetail outApiArtistDetail){
         Artist artist=artistMapper.selectById(artistId);//选一个,选列表用selectList
         if(artist==null){
-            outApiArtistDetail.setCode(200);
+            outApiArtistDetail.setCode(300);
         }
         else{
-            outApiArtistDetail.setCode(300);
+            outApiArtistDetail.setCode(200);
             outApiArtistDetail.setArtistDetail(artist);
         }
     }
-    public void getArtistDescribe(int artistId, OutApiGetArtistDescribe outApiGetArtistDescribe){
-        QueryWrapper<Artist> qw=new QueryWrapper<>();
-        qw.like("artist_id",artistId);
-        Artist artists=artistMapper.selectOne(qw);//选一个,选列表用selectList
+    public void getArtistDescribe(long artistId, OutApiGetArtistDescribe outApiGetArtistDescribe){
+        Artist artists=artistMapper.selectById(artistId);//选一个,选列表用selectList
         if(artists==null){
-            outApiGetArtistDescribe.setCode(200);
+            outApiGetArtistDescribe.setCode(300);
         }
         else {
-            outApiGetArtistDescribe.setCode(300);
+            outApiGetArtistDescribe.setCode(200);
             outApiGetArtistDescribe.setProfile(artists.getProfile());
         }
     }

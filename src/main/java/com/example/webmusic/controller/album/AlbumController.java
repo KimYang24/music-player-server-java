@@ -29,33 +29,44 @@ public class AlbumController {
 
     //专辑详情页信息
     @GetMapping(value = "/detail/album")
-    public OutApiAlbumDetail albumDetail(@RequestParam InApiAlbumDetail inApiAlbumDetail){
+    public OutApiAlbumDetail albumDetail(@RequestParam (value = "albumId")long albumId){
         OutApiAlbumDetail outApiAlbumDetail =new OutApiAlbumDetail();
-        albumService.albumDetail(inApiAlbumDetail,outApiAlbumDetail);
+        albumService.albumDetail(albumId,outApiAlbumDetail);
         return outApiAlbumDetail;
     }
 
     //分页获取歌手专辑
     @GetMapping(value = "/detail/artist/album")
-    public OutApiGetPageAlbumByArtist outApiGetPageAlbumByArtist(@RequestParam InApiGetPageAlbumByArtist inApiGetPageAlbumByArtist){
+    public OutApiGetPageAlbumByArtist outApiGetPageAlbumByArtist(@RequestParam ("artistId")long artistId,
+                                                                 @RequestParam("currentPage")long currentPage,
+                                                                 @RequestParam("pageSize")long pageSize){
         OutApiGetPageAlbumByArtist outApiGetPageAlbumByArtist=new OutApiGetPageAlbumByArtist();
-        albumService.getPageAlbumByArtist(inApiGetPageAlbumByArtist,outApiGetPageAlbumByArtist);
+        albumService.getPageAlbumByArtist(artistId,currentPage,pageSize,outApiGetPageAlbumByArtist);
         return outApiGetPageAlbumByArtist;
+    }
+
+    //获取特定专辑
+    @GetMapping(value = "/admin/theAlbum")
+    public OutApiGetAlbum outApigetAlbum(@RequestParam("albumName")String albumName){
+        OutApiGetAlbum outApiGetAlbum=new OutApiGetAlbum();
+        albumService.getAlbum(albumName,outApiGetAlbum);
+        return outApiGetAlbum;
     }
 
     //获得特定页专辑信息
     @GetMapping("/admin/pageAllAlbum")
-    public OutApiGetPageAlbum getPageAlbum(@RequestParam InApiGetPageAlbum inApiGetPageAlbum){
+    public OutApiGetPageAlbum getPageAlbum(@RequestParam ("currentPage")long currentPage,
+                                           @RequestParam("pageSize")long pageSize){
         OutApiGetPageAlbum outApiGetPageAlbum = new OutApiGetPageAlbum();
-        albumService.getPageAlbum(inApiGetPageAlbum,outApiGetPageAlbum);
+        albumService.getPageAlbum(currentPage,pageSize,outApiGetPageAlbum);
         return outApiGetPageAlbum;
     }
 
     //管理端：根据歌手获取专辑
     @GetMapping(value = "/admin/getAlbumByArtist")
-    public  OutApiGetAlbumByArtist outApiGetAlbumByArtist(@RequestParam InApiGetAlbumByArtist inApiGetAlbumByArtist){
+    public  OutApiGetAlbumByArtist outApiGetAlbumByArtist(@RequestParam ("artistId")long artistId){
         OutApiGetAlbumByArtist outApiGetAlbumByArtist=new OutApiGetAlbumByArtist();
-        albumService.getAlbumByArtist(inApiGetAlbumByArtist,outApiGetAlbumByArtist);
+        albumService.getAlbumByArtist(artistId,outApiGetAlbumByArtist);
         return outApiGetAlbumByArtist;
     }
 
@@ -69,17 +80,17 @@ public class AlbumController {
 
     //删除专辑
     @GetMapping(value = "/admin/deleteAlbum")
-    public  OutApiDeleteAlbum deleteAlbum(@RequestParam InApiDeleteAlbum inApiDeleteAlbum){
+    public  OutApiDeleteAlbum deleteAlbum(@RequestParam ("albumId")long albumId){
         OutApiDeleteAlbum outApiDeleteAlbum=new OutApiDeleteAlbum();
-        albumService.deleteAlbum(inApiDeleteAlbum,outApiDeleteAlbum);
+        albumService.deleteAlbum(albumId,outApiDeleteAlbum);
         return outApiDeleteAlbum;
     }
 
     //修改专辑信息
     @PostMapping(value = "/admin/modifyAlbum")
-    public OutApiModifyAlbum modifyAlbum(@RequestBody InApiModifyAlbumInfo inApiModifyAlbumInfo){
+    public OutApiModifyAlbum modifyAlbum(@RequestBody Album album){
         OutApiModifyAlbum outApiModifyAlbum=new OutApiModifyAlbum();
-        albumService.modifyAlbumInfo(inApiModifyAlbumInfo,outApiModifyAlbum);
+        albumService.modifyAlbumInfo(album,outApiModifyAlbum);
         return outApiModifyAlbum;
     }
 }

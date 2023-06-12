@@ -8,29 +8,29 @@ import com.example.webmusic.models.album.Album;
 
 public interface AlbumService extends IService<Album> {
     //获取特定页专辑
-    void getPageAlbum(InApiGetPageAlbum inApiGetPageAlbum, OutApiGetPageAlbum outApiGetPageAlbum);
+    void getPageAlbum(long currentPage,long pageSize, OutApiGetPageAlbum outApiGetPageAlbum);
 
     //获取特定专辑
-    void getAlbum(InApiGetAlbum inApiGetAlbum, OutApiGetAlbum outApiGetAlbum);
+    void getAlbum(String albumName, OutApiGetAlbum outApiGetAlbum);
 
     //添加专辑
     void addAlbum(Album album, OutApiAddAlbum outApiAddAlbum);
 
     //修改专辑信息
-    void modifyAlbumInfo(InApiModifyAlbumInfo inApiModifyAlbumInfo, OutApiModifyAlbum outApiModifyAlbumInfo);
+    void modifyAlbumInfo(Album album, OutApiModifyAlbum outApiModifyAlbumInfo);
 
     //删除专辑
-    void deleteAlbum(InApiDeleteAlbum inApiDeleteAlbum, OutApiDeleteAlbum outApiDeleteAlbum);
+    void deleteAlbum(long albumId, OutApiDeleteAlbum outApiDeleteAlbum);
 
     //歌曲推荐；随机返回歌曲
     void getRandomAlbum (OutApiGetRecommendAlbum out);
 
     //专辑详情页
-    void albumDetail(InApiAlbumDetail inApiAlbumDetail, OutApiAlbumDetail outApiAlbumDetail);
+    void albumDetail(long albumId, OutApiAlbumDetail outApiAlbumDetail);
 
     //分页获取歌手专辑
-    void getPageAlbumByArtist(InApiGetPageAlbumByArtist inApiGetPageAlbumByArtist,OutApiGetPageAlbumByArtist outApiGetPageAlbumByArtist);
+    void getPageAlbumByArtist(long artistId,long currentPage,long pageSize,OutApiGetPageAlbumByArtist outApiGetPageAlbumByArtist);
 
     //根据歌手获取专辑
-    void getAlbumByArtist(InApiGetAlbumByArtist inApiGetAlbumByArtist, OutApiGetAlbumByArtist outApiGetAlbumByArtist);
+    void getAlbumByArtist(long artistId, OutApiGetAlbumByArtist outApiGetAlbumByArtist);
 }

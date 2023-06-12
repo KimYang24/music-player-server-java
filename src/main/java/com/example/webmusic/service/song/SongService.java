@@ -31,7 +31,7 @@ public interface SongService extends IService<Song> {
 
     //根据songId获取单首歌曲
     void getOneSongById(long songID,OutApiGetOneSong out);
-    void getSongListByArtist(InApiGetSongsByArtist inApiGetSongsByArtist,OutApiGetSongsByArtist outApiGetSongsByArtist);
+    void getSongListByArtist(long artistId,String order,long currentPage,long pageSize,OutApiGetSongsByArtist outApiGetSongsByArtist);
 
     //歌曲推荐；随机返回歌曲
     void getRandomSong (OutApiGetRecommendSong out);

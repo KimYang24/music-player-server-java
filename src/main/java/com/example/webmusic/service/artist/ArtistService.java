@@ -21,6 +21,4 @@ public interface ArtistService extends IService<Artist> {
     int deleteArtist(int artistID);
     int modifyArtist(Artist artist);
 
-    void getArtistDescribe(int artistId, OutApiGetArtistDescribe outApiGetArtistDescribe);
-
 }

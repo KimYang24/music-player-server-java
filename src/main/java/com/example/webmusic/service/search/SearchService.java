@@ -11,5 +11,5 @@ public interface SearchService{
     void searchSongsByKeyword(InApiSearchByKeyword inApiSearchByKeyword, OutApiSearchSongs outApiSearchSongs);
     void searchHot(OutApiSearchHot outApiSearchHot);
     void searchHotByKeyWord(String keyword, OutApiHotByKeyword outApiHotByKeyword);
-    List getSwipers(OutApiGetSwipers outApiGetSwipers);
+    void getSwipers(OutApiGetSwipers outApiGetSwipers);
 }
