@@ -5,9 +5,8 @@ import com.example.webmusic.controller.album.out.OutApiGetAlbumByArtist;
 //import com.example.webmusic.controller.artist.in.InApiArtistDetail;
 // com.example.webmusic.controller.artist.in.InApiGetArtistDescribe;
 import com.example.webmusic.controller.artist.in.InApi_getSelectedArtist;
-import com.example.webmusic.controller.artist.in.InApi_modifyArtist;
+import com.example.webmusic.controller.artist.in.InApi_modifyArtistAndAddArtist;
 import com.example.webmusic.controller.artist.out.*;
-import com.example.webmusic.controller.song.out.OutApiGetSongsByArtist;
 import com.example.webmusic.models.album.Album;
 import com.example.webmusic.models.artist.Artist;
 import com.example.webmusic.models.user.User;
@@ -19,7 +18,9 @@ import com.example.webmusic.controller.artist.out.OutApiGetArtistDescribe;
 import com.example.webmusic.controller.artist.out.OutApi_getRecommendArtist;
 import com.example.webmusic.controller.artist.out.OutApi_getSelectedArtist;
 
+import com.example.webmusic.service.album.AlbumService;
 import com.example.webmusic.service.artist.ArtistService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,11 +33,9 @@ public class ArtistController {
     @Autowired
     private ArtistService artistService;
 
-
     @Autowired
     private AlbumService albumService;
     // TODO 不要没测试过就推上来!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     //获取歌手详情页
     @GetMapping(value = "/detail/artist")
     public OutApiArtistDetail artistDetail(@RequestParam(value = "artistId") long artistId){
@@ -87,8 +86,9 @@ public class ArtistController {
 
     //添加歌手
     @PostMapping("/admin/addArtist")
-    public OutApi_addArtist addArtist(@RequestBody Artist artist) {
+    public OutApi_addArtist addArtist(@RequestBody InApi_modifyArtistAndAddArtist in) {
         OutApi_addArtist out =  new OutApi_addArtist();
+        Artist artist = in.getData();
         artistService.addArtist(artist, out);
         return out;
     }
@@ -103,8 +103,8 @@ public class ArtistController {
     }
 
     //修改歌手基础信息
-    @PostMapping("/admin/modifyAritst")
-    public Map<String,Object> modifyArtist(@RequestBody InApi_modifyArtist in) {
+    @PostMapping("/admin/modifyArtist")
+    public Map<String,Object> modifyArtist(@RequestBody InApi_modifyArtistAndAddArtist in) {
         Artist artist = in.getData();
         int code = artistService.modifyArtist(artist);
         Map<String,Object> m = new HashMap<>();

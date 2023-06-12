@@ -82,10 +82,10 @@ public class UserController {
     }
 
     //上传用户照片
-    @PostMapping("/User/modifyUploadPic")
+    @PostMapping("/User/uploadPic")
     public Map<String,Object> uploadUserPic(@RequestParam(value = "file") MultipartFile file,@RequestAttribute(value = "ID") int userID) {
-        System.out.println("进入controller成功");
-        int code = userService.updateUserPic(10, file);
+        System.out.println("进入controller成功,用户ID："+ userID);
+        int code = userService.updateUserPic(userID, file);
         Map<String,Object> m = new HashMap<>();
         m.put("code",code);
         return m;
@@ -97,5 +97,13 @@ public class UserController {
         OutApiGetUserProfile outApiGetUserProfile = new OutApiGetUserProfile();
         userService.getUserProfile(userId,outApiGetUserProfile);
         return outApiGetUserProfile;
+    }
+
+    //获取一个用户信息？？？
+    @GetMapping("/User/aInfo")
+    public OutApi_getAUser getAUser(@RequestParam("index") long index) {
+        OutApi_getAUser out = new OutApi_getAUser();
+        userService.getAUser(index,out);
+        return out;
     }
 }

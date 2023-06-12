@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //注册拦截器
-        //registry.addInterceptor(new JWTInterceptor());
-                //.addPathPatterns("/User/uploadPic");
+        registry.addInterceptor(new JWTInterceptor())
+                .addPathPatterns("/User/uploadPic");
     }
 }

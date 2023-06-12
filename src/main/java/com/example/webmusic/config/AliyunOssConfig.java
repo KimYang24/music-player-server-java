@@ -14,7 +14,9 @@ public class AliyunOssConfig {
     // 阿里云账号AccessKey
     // 创建OSSClient实例。
     static public OSS createOssClient() throws IOException {
-        File file = new File("./key.json");
+        String filePath = new File("").getAbsolutePath();
+        System.out.println("当前文件夹：" + filePath);
+        File file = new File("./src/main/java/com/example/webmusic/config/key.json");
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String,Object> map = objectMapper.readValue(file,new TypeReference<Map<String,Object>>(){});
         return new OSSClientBuilder().build(
