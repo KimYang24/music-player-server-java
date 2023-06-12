@@ -9,6 +9,7 @@ import com.example.webmusic.controller.search.out.OutApiSearchAlbums;
 import com.example.webmusic.controller.search.out.OutApiSearchArtists;
 import com.example.webmusic.controller.search.out.OutApiSearchSongs;
 import com.example.webmusic.controller.search.out.*;
+import com.example.webmusic.frontend_model.SwiperFront;
 import com.example.webmusic.mapper.album.AlbumMapper;
 import com.example.webmusic.mapper.artist.ArtistMapper;
 import com.example.webmusic.mapper.song.SongMapper;
@@ -158,36 +159,34 @@ public class SearchServiceImpl implements SearchService{
     }
 
     //轮播图推荐
-    public List getSwipers(OutApiGetSwipers outApiGetSwipers){
+    public void getSwipers(OutApiGetSwipers outApiGetSwipers){
         //随机返回3个歌手、专辑、歌曲
         List<Song> songs = songMapper.selectList(new QueryWrapper<Song>().orderByAsc("rand()").last("limit 3"));
         List<Album> albums = albumMapper.selectList(new QueryWrapper<Album>().orderByAsc("rand()").last("limit 3"));
         List<Artist> artists = artistMapper.selectList(new QueryWrapper<Artist>().orderByAsc("rand()").last("limit 3"));
-        List<OutApiGetSwipers> banner=new ArrayList<>();
+        List<SwiperFront> swiperFronts=new ArrayList<>();
         for (Album album : albums) {
-            OutApiGetSwipers targetdata = new OutApiGetSwipers();
-            targetdata.setTargetTitle(album.getName());
-            targetdata.setTargetType(1);
+            SwiperFront targetdata = new SwiperFront();
+            targetdata.setTypeTitle(album.getName());
+            targetdata.setTargetType("2");
             targetdata.setTargetId(album.getAlbum_id());
-            targetdata.setCode(200);
-            banner.add(targetdata);
+            swiperFronts.add(targetdata);
         }
         for (Artist artist : artists) {
-            OutApiGetSwipers targetdata = new OutApiGetSwipers();
-            targetdata.setTargetTitle(artist.getName());
-            targetdata.setTargetType(1);
+            SwiperFront targetdata = new SwiperFront();
+            targetdata.setTypeTitle(artist.getName());
+            targetdata.setTargetType("3");
             targetdata.setTargetId(artist.getArtist_id());
-            targetdata.setCode(200);
-            banner.add(targetdata);
+            swiperFronts.add(targetdata);
         }
         for (Song song : songs) {
-            OutApiGetSwipers targetdata = new OutApiGetSwipers();
-            targetdata.setTargetTitle(song.getName());
-            targetdata.setTargetType(1);
-            targetdata.setTargetId(song.getAlbum_id());
-            targetdata.setCode(200);
-            banner.add(targetdata);
+            SwiperFront targetdata = new SwiperFront();
+            targetdata.setTypeTitle(song.getName());
+            targetdata.setTargetType("1");
+            targetdata.setTargetId(song.getSong_id());
+            swiperFronts.add(targetdata);
         }
-        return banner;
+        outApiGetSwipers.setCode(200);
+        outApiGetSwipers.setSwipers(swiperFronts);
     }
 }

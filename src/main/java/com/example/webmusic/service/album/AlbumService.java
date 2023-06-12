@@ -17,7 +17,7 @@ public interface AlbumService extends IService<Album> {
     void addAlbum(Album album, OutApiAddAlbum outApiAddAlbum);
 
     //修改专辑信息
-    void modifyAlbumInfo(InApiModifyAlbumInfo inApiModifyAlbumInfo, OutApiModifyAlbum outApiModifyAlbumInfo);
+    void modifyAlbumInfo(Album album, OutApiModifyAlbum outApiModifyAlbumInfo);
 
     //删除专辑
     void deleteAlbum(long albumId, OutApiDeleteAlbum outApiDeleteAlbum);

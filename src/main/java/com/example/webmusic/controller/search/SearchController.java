@@ -83,8 +83,9 @@ public class SearchController {
         return outApiSearchAlbums;
     }
     @GetMapping(value = "/discover/swiper")
-    public List<OutApiSearchAlbums> getSwipers(){
+    public OutApiGetSwipers getSwipers(){
         OutApiGetSwipers outApiGetSwipers=new OutApiGetSwipers();
-        return searchService.getSwipers(outApiGetSwipers);
+        searchService.getSwipers(outApiGetSwipers);
+        return outApiGetSwipers;
     }
 }

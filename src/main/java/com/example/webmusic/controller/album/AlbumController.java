@@ -29,7 +29,7 @@ public class AlbumController {
 
     //专辑详情页信息
     @GetMapping(value = "/detail/album")
-    public OutApiAlbumDetail albumDetail(@RequestParam ("albumId")long albumId){
+    public OutApiAlbumDetail albumDetail(@RequestParam (value = "albumId")long albumId){
         OutApiAlbumDetail outApiAlbumDetail =new OutApiAlbumDetail();
         albumService.albumDetail(albumId,outApiAlbumDetail);
         return outApiAlbumDetail;
@@ -80,7 +80,7 @@ public class AlbumController {
 
     //删除专辑
     @GetMapping(value = "/admin/deleteAlbum")
-    public  OutApiDeleteAlbum deleteAlbum(@RequestParam ("albumId")int albumId){
+    public  OutApiDeleteAlbum deleteAlbum(@RequestParam ("albumId")long albumId){
         OutApiDeleteAlbum outApiDeleteAlbum=new OutApiDeleteAlbum();
         albumService.deleteAlbum(albumId,outApiDeleteAlbum);
         return outApiDeleteAlbum;
@@ -88,9 +88,9 @@ public class AlbumController {
 
     //修改专辑信息
     @PostMapping(value = "/admin/modifyAlbum")
-    public OutApiModifyAlbum modifyAlbum(@RequestBody InApiModifyAlbumInfo inApiModifyAlbumInfo){
+    public OutApiModifyAlbum modifyAlbum(@RequestBody Album album){
         OutApiModifyAlbum outApiModifyAlbum=new OutApiModifyAlbum();
-        albumService.modifyAlbumInfo(inApiModifyAlbumInfo,outApiModifyAlbum);
+        albumService.modifyAlbumInfo(album,outApiModifyAlbum);
         return outApiModifyAlbum;
     }
 }

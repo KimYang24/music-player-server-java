@@ -41,11 +41,10 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
     //获取特定专辑
     public void getAlbum(String albumName, OutApiGetAlbum outApiGetAlbum){
         QueryWrapper<Album> qw = new QueryWrapper<>();
-        qw.like("albumName",albumName);
+        qw.like("name",albumName);
         List<Album> albumList = albumMapper.selectList(qw);
         if (albumList.size() == 0){
             outApiGetAlbum.setCode(300);
-            return;
         }
         else{
             outApiGetAlbum.setCode(200);
@@ -58,7 +57,7 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
     public void addAlbum(Album album, OutApiAddAlbum outApiAddAlbum) {
         QueryWrapper<Album> qw = new QueryWrapper<>();
         //排除同一歌手的同一个专辑
-        qw.eq("Name",album.getName()).and(albumQueryWrapper -> albumQueryWrapper.eq("artist_id", album.getAlbum_id()));
+        qw.eq("Name",album.getName()).and(albumQueryWrapper -> albumQueryWrapper.eq("artist_id", album.getArtist_id()));
         Album temp = albumMapper.selectOne(qw);
         if(temp != null) {
             outApiAddAlbum.setCode(300);
@@ -81,20 +80,20 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
 
     @Override
     //修改专辑信息
-    public void modifyAlbumInfo(InApiModifyAlbumInfo inApiModifyAlbumInfo, OutApiModifyAlbum outApiModifyAlbumInfo){
-        Album album = albumMapper.selectById(inApiModifyAlbumInfo.getData().getAlbum_id());
-        String OldName = album.getName();
-        int ok = albumMapper.updateById(inApiModifyAlbumInfo.getData());
-        if (ok == 1)
-            outApiModifyAlbumInfo.setCode(200);
-        else{
+    public void modifyAlbumInfo(Album album, OutApiModifyAlbum outApiModifyAlbumInfo){
+        Album data = albumMapper.selectById(album.getAlbum_id());//data:旧数据
+        String OldName = data.getName();
+        int ok = albumMapper.updateById(album);
+        if (ok == 0)
             outApiModifyAlbumInfo.setCode(300);
-            if (!inApiModifyAlbumInfo.getData().getName().equals(OldName)) {
-                QueryWrapper<Song> qw = new QueryWrapper<>();
-                qw.like("album_id", inApiModifyAlbumInfo.getData().getAlbum_id());
-                List<Song> songlist = songMapper.selectList(qw);
+        else{
+            outApiModifyAlbumInfo.setCode(200);
+            if (!album.getName().equals(OldName)) {
+                QueryWrapper<Song> qww = new QueryWrapper<>();
+                qww.eq("album_id", data.getAlbum_id());
+                List<Song> songlist = songMapper.selectList(qww);
                 for (Song s : songlist) {
-                    s.setName(inApiModifyAlbumInfo.getData().getName());
+                    s.setName(album.getName());
                     songMapper.updateById(s);
                 }
             }
@@ -110,14 +109,14 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
         else {
             outApiDeleteAlbum.setCode(300);
             QueryWrapper<Song> qw = new QueryWrapper<>();
-            qw.like("album_id", albumId);
+            qw.eq("album_id", albumId);
             List<Song> songlist = songMapper.selectList(qw);
             if (songlist.size() == 0)
                 return;
             else {
                 for (Song song : songlist) {
                     QueryWrapper<Song> queryWrapper = new QueryWrapper<>();
-                    queryWrapper.eq("id", song.getSong_id());
+                    queryWrapper.eq("song_id", song.getSong_id());
                     songMapper.delete(queryWrapper);
                 }
             }
@@ -139,19 +138,17 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
     @Override
     //专辑详情页
     public void albumDetail(long albumId, OutApiAlbumDetail outApiAlbumDetail){
-        QueryWrapper<Album> qw=new QueryWrapper<>();
-        QueryWrapper<Song> qww=new QueryWrapper<>();
-        qw.like("album_id",albumId);
-        qww.like("album_id",albumId);
-        List<Album> albumList=albumMapper.selectList(qw);
-        List<Song> songList=songMapper.selectList(qww);
-        if(albumList.size()==0){
-            outApiAlbumDetail.setCode(200);
+        QueryWrapper<Song> qw = new QueryWrapper<>();
+        qw.eq("album_id", albumId);
+        List<Song> songlist = songMapper.selectList(qw);
+        Album album=albumMapper.selectById(albumId);
+        if(album==null){
+            outApiAlbumDetail.setCode(300);
         }
         else{
-            outApiAlbumDetail.setCode(300);
-            outApiAlbumDetail.setAlbums(albumList);
-            outApiAlbumDetail.setSongs(songList);
+            outApiAlbumDetail.setCode(200);
+            outApiAlbumDetail.setAlbum(album);
+            outApiAlbumDetail.setSongs(songlist);
         }
     }
 
@@ -182,5 +179,4 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
         }
         out.setAlbums(albums);
     }
-
 }
