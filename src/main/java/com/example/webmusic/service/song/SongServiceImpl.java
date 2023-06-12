@@ -285,7 +285,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
             // 数据库中不存在符合条件的记录，创建新的记录
             Artist newArtist = Artist.builder()
                     .name(columnValue)
-                    .song_size(1)
+                    .song_size((long)1)
                     .build();
             // 插入新的记录
             artistService.save(newArtist);

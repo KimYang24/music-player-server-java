@@ -2,6 +2,7 @@ package com.example.webmusic.service.user;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.webmusic.controller.user.in.User.*;
@@ -10,6 +11,7 @@ import com.example.webmusic.frontend_model.UserFront;
 import com.example.webmusic.mapper.user.UserMapper;
 import com.example.webmusic.models.user.User;
 import com.example.webmusic.service.log.LogService;
+import com.example.webmusic.utils.oss.OutApi_uploadFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -170,6 +172,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     //上传用户头像
     @Override
     public int updateUserPic(int userID, MultipartFile file) {
+        OutApi_uploadFile out = new OutApi_uploadFile();
         System.out.println("进入service成功");
         int code = 200;
         if(!Objects.requireNonNull(file.getContentType()).contains("image/")){
@@ -178,11 +181,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return code;
         }
         try {
-            code = UploadFile.uploadFile(userID, file, 1);
+            UploadFile.uploadFile(userID, file, 1,out);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return code;
+        if(out.getCode() == 200){
+            UpdateWrapper<User> uw = new UpdateWrapper<>();
+            uw.eq("user_id", userID).set("pic_url", out.getUrl());
+            userMapper.update(null,uw);
+        }
+        return out.getCode();
     }
 
     @Override
@@ -208,5 +216,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             outApiGetUserProfile.setProfile(userFront);
             outApiGetUserProfile.setCode(200);
         }
+    }
+
+    @Override
+    public void getAUser(long index,OutApi_getAUser out) {
+        long totals  = userMapper.selectCount(null);
+        out.setTotals(totals);
+        QueryWrapper<User> qw = new QueryWrapper<>();
+        qw.last("LIMIT " + (index-1) + ", 1");
+        User user = userMapper.selectOne(qw);
+        if(user == null){
+            out.setCode(300);
+            return;
+        }
+        out.setCode(200);
+        out.setData(user);
     }
 }

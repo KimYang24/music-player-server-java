@@ -23,7 +23,7 @@ public class JwtUtil {
         claims.put("ID",ID);
 
         // 设置 JWT 有效期
-        long expMillis = nowMillis + 300 * 1000L;
+        long expMillis = nowMillis + 3000 * 1000L;
         Date exp = new Date(expMillis);
 
         return Jwts.builder()
