@@ -6,13 +6,16 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.webmusic.controller.album.in.*;
 import com.example.webmusic.controller.album.out.*;
+import com.example.webmusic.controller.song.out.OutApiGetSongByAlbum;
 import com.example.webmusic.mapper.album.AlbumMapper;
 import com.example.webmusic.mapper.song.SongMapper;
 import com.example.webmusic.models.album.Album;
 import com.example.webmusic.models.song.Song;
 import com.example.webmusic.models.user.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.webmusic.service.song.*;
 
 import java.util.List;
 
@@ -23,6 +26,10 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
     private AlbumMapper albumMapper;
     private SongMapper songMapper;
 
+    @Autowired
+    public AlbumServiceImpl(SongMapper songMapper) {//构造函数。确认在该类的构造函数中将songMapper注入
+        this.songMapper = songMapper;
+    }
     @Override
     //获取特定页专辑
     public void getPageAlbum(long currentPage ,long pageSize, OutApiGetPageAlbum outApiGetPageAlbum){
@@ -81,17 +88,16 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
     @Override
     //修改专辑信息
     public void modifyAlbumInfo(Album album, OutApiModifyAlbum outApiModifyAlbumInfo){
-        Album data = albumMapper.selectById(album.getAlbum_id());//data:旧数据
-        String OldName = data.getName();
+
         int ok = albumMapper.updateById(album);
         if (ok == 0)
             outApiModifyAlbumInfo.setCode(300);
         else{
             outApiModifyAlbumInfo.setCode(200);
+            Album data = albumMapper.selectById(album.getAlbum_id());//data:旧数据
+            String OldName = data.getName();
             if (!album.getName().equals(OldName)) {
-                QueryWrapper<Song> qww = new QueryWrapper<>();
-                qww.eq("album_id", data.getAlbum_id());
-                List<Song> songlist = songMapper.selectList(qww);
+            List<Song> songlist = songMapper.selectList(new QueryWrapper<Song>().eq("album_id",data.getAlbum_id()));
                 for (Song s : songlist) {
                     s.setName(album.getName());
                     songMapper.updateById(s);
@@ -138,15 +144,14 @@ public class AlbumServiceImpl extends ServiceImpl<AlbumMapper, Album> implements
     @Override
     //专辑详情页
     public void albumDetail(long albumId, OutApiAlbumDetail outApiAlbumDetail){
-        QueryWrapper<Song> qw = new QueryWrapper<>();
-        qw.eq("album_id", albumId);
-        List<Song> songlist = songMapper.selectList(qw);
         Album album=albumMapper.selectById(albumId);
         if(album==null){
             outApiAlbumDetail.setCode(300);
         }
         else{
             outApiAlbumDetail.setCode(200);
+            List<Song> songlist = songMapper.selectList(new QueryWrapper<Song>().eq("album_id", albumId));
+//            List<Song> songlist = songMapper.selectList(qw);//不知道查询的是<Song>这个表,默认<Album>
             outApiAlbumDetail.setAlbum(album);
             outApiAlbumDetail.setSongs(songlist);
         }
