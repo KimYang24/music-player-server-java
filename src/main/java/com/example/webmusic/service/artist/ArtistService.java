@@ -13,10 +13,14 @@ public interface ArtistService extends IService<Artist> {
     void getArtistByCon(InApi_getSelectedArtist in, OutApi_getSelectedArtist out);
 
     void getRandomArtist(OutApi_getRecommendArtist out);
+
     void getArtistDescribe(long artistId, OutApiGetArtistDescribe outApiGetArtistDescribe);
     void getPageArtist(int pagenum, int pagesize, OutApi_getPageArtist out);
     void getArtist(String name,OutApi_getArtist out);
     void addArtist(Artist artist, OutApi_addArtist out);
     int deleteArtist(int artistID);
     int modifyArtist(Artist artist);
+
+    void getArtistDescribe(int artistId, OutApiGetArtistDescribe outApiGetArtistDescribe);
+
 }

@@ -1,12 +1,30 @@
 package com.example.webmusic.service.playlist;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.webmusic.controller.playlist.OutApiGetHotPlaylist;
+import com.example.webmusic.controller.playlist.in.InApiGetHotPlaylist;
 import com.example.webmusic.controller.playlist.out.OutApi_getOnePlayList;
 import com.example.webmusic.mapper.playlist.PlayListMapper;
 import com.example.webmusic.models.playlist.PlayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import java.util.List;
+import java.util.Random;
+
+@Mapper
+interface PlaylistMapper {//在PlaylistMapper中定义getPlaylistsByPage方法：
+
+    @Select("SELECT * FROM playlist LIMIT #{pageSize} OFFSET #{offset}")
+    static List<PlayList> getPlaylistsByPage(@Param("pageNum") int pageNum, @Param("pageSize") int pageSize) {
+        return null;
+    }
+}
 @Service
 public class PlayListServiceImpl extends ServiceImpl<PlayListMapper, PlayList> implements PlayListService {
     @Autowired
@@ -21,5 +39,14 @@ public class PlayListServiceImpl extends ServiceImpl<PlayListMapper, PlayList> i
             out.setCode(200);
         }
         out.setPlaylist(playList);
+    }
+
+    public void getHotPlaylist(InApiGetHotPlaylist inApiGetHotPlaylist, OutApiGetHotPlaylist outApiGetHotPlaylist){
+        //获取指定页码的歌单列表
+        List<PlayList> playlists = PlaylistMapper.getPlaylistsByPage(inApiGetHotPlaylist.getCurrentPage(), inApiGetHotPlaylist.getPageSize());
+        // 随机获取一个歌单
+        int randomIndex = new Random().nextInt(playlists.size());
+        outApiGetHotPlaylist.setData(playlists.get(randomIndex));
+        outApiGetHotPlaylist.setCode(200);
     }
 }
