@@ -21,7 +21,7 @@ public class Artist {
      * 歌手专辑数量
      */
     @JsonProperty("albumSize")
-    private long album_size;
+    private Long album_size;
     /**
      * 歌手名字首字母
      */
@@ -30,11 +30,11 @@ public class Artist {
     /**
      * 歌手性别，1男2女3组合
      */
-    private long gender;
+    private Long gender;
     /**
      * 歌手的地区
      */
-    private long location;
+    private Long location;
     @JsonProperty("artist")
     private String name;
     /**
@@ -50,5 +50,5 @@ public class Artist {
      * 歌手歌曲总数
      */
     @JsonProperty("songSize")
-    private long song_size;
+    private Long song_size;
 }

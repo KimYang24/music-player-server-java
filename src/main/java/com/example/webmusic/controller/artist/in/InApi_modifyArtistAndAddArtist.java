@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class InApi_modifyArtist {
+public class InApi_modifyArtistAndAddArtist {
     Artist data;
 }
