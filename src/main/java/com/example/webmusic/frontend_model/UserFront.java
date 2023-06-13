@@ -16,4 +16,5 @@ public class UserFront {
     private String phone;
     private String picUrl;
     private String username;
+    private String password;
 }

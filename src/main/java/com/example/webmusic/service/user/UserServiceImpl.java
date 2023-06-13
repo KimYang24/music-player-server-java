@@ -206,6 +206,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                     .phone(user.getPhone())
                     .picUrl(user.getPic_url())
                     .username(user.getUsername())
+                    .password(user.getPassword())
                     .build();
             outApiGetUserProfile.setProfile(userFront);
             outApiGetUserProfile.setCode(200);

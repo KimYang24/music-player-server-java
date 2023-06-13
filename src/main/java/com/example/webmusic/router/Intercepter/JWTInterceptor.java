@@ -39,6 +39,8 @@ public class JWTInterceptor implements HandlerInterceptor {
                     System.out.println("claims非空");
                     // 将用户信息存入请求中，方便后续的操作
                     request.setAttribute("ID", claims.get("ID"));
+                    System.out.println("ID is:"+claims.get("ID"));
+                    return true;
                 }
             } catch (Exception e) {
                 System.out.println("e.getMessage() = " + e.getMessage());
