@@ -14,7 +14,7 @@ public interface UserService extends IService<User> {
     void getUserInfo(String name,OutApi_getUserInfo out);
     void addUserInfo(User user,OutApi_addUserInfo out);
     int modifyUserInfo(User user);
-    int deleteUserInfo(int userID);
+    long deleteUserInfo(long userID);
     int updateUserPic(int userID, MultipartFile file);
     void getUserProfile(long userId,OutApiGetUserProfile outApiGetUserProfile);
     void getAUser(long index,OutApi_getAUser out);

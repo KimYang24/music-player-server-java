@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class OutApiAddAlbum {
     private int code;
-    private int currentPage;
+    private int totals;
     private int totalPage;
     private List<Album> data;
 }

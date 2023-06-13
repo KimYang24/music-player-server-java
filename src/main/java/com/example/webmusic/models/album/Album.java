@@ -18,6 +18,7 @@ public class Album {
      * 主键
      */
     @TableId(type = IdType.AUTO)
+    @JsonProperty("albumId")
     private long album_id;
     /**
      * 歌手名
@@ -31,6 +32,7 @@ public class Album {
     /**
      * 专辑名
      */
+    @JsonProperty("album")
     private String name;
     /**
      * 专辑描述

@@ -74,6 +74,7 @@ public class LogServiceImppl extends ServiceImpl<LogMapper, Log> implements LogS
                 .type(1)
                 .username(user.getUsername())
                 .user_id(user.getUser_id())
+                .time(new Date().toString())
                 .build();
         if (save(log)) {
             return 200;

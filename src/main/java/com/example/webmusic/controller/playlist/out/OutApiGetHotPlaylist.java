@@ -13,8 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OutApiGetHotPlaylist {//获取热门歌单
-    private List<PlayList> data;
-    private int code;
-    private int pageTotal;
+    private List<PlayList> playlist;
+    private long code;
+    private long pageTotal;
 
 }

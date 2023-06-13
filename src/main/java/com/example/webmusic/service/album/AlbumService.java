@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.webmusic.controller.album.in.*;
 import com.example.webmusic.controller.album.out.*;
 import com.example.webmusic.controller.song.out.OutApiGetPageSong;
+import com.example.webmusic.frontend_model.AlbumFront;
 import com.example.webmusic.models.album.Album;
 
 public interface AlbumService extends IService<Album> {
@@ -14,10 +15,10 @@ public interface AlbumService extends IService<Album> {
     void getAlbum(String albumName, OutApiGetAlbum outApiGetAlbum);
 
     //添加专辑
-    void addAlbum(Album album, OutApiAddAlbum outApiAddAlbum);
+    void addAlbum(AlbumFront album, OutApiAddAlbum outApiAddAlbum);
 
     //修改专辑信息
-    void modifyAlbumInfo(Album album, OutApiModifyAlbum outApiModifyAlbumInfo);
+    void modifyAlbumInfo(AlbumFront albumFront, OutApiModifyAlbum outApiModifyAlbumInfo);
 
     //删除专辑
     void deleteAlbum(long albumId, OutApiDeleteAlbum outApiDeleteAlbum);

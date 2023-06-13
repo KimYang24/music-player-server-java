@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InApi_getSelectedArtist {
-    int pageSize;
-    int currentPage;
+    long pageSize;
+    long currentPage;
     String firstLetter;
-    int gender;
-    int location;
+    long gender;
+    long location;
 }

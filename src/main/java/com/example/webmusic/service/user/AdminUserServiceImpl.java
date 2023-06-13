@@ -39,6 +39,7 @@ public class AdminUserServiceImpl extends ServiceImpl<AdminUserMapper, AdminUser
             else {
                 String token = JwtUtil.generateToken(temp.getAdmin_id());
                 out.setToken(token);
+                System.out.println("token = " + token);
                 out.setAdminId(temp.getAdmin_id());
                 out.setCode(200);
                 return;

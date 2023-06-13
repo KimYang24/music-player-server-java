@@ -18,7 +18,7 @@ public class SwiperFront {
      * 歌曲id或专辑id或歌手id
      */
     private long targetId;
-    private String targetType;
+    private long targetType;
     /**
      * 歌曲名或专辑名或歌手名
      */

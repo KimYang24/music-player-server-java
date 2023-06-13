@@ -1,26 +1,19 @@
 package com.example.webmusic.controller.artist;
 
 
-import com.example.webmusic.controller.album.out.OutApiGetAlbumByArtist;
-//import com.example.webmusic.controller.artist.in.InApiArtistDetail;
-// com.example.webmusic.controller.artist.in.InApiGetArtistDescribe;
 import com.example.webmusic.controller.artist.in.InApi_getSelectedArtist;
 import com.example.webmusic.controller.artist.in.InApi_modifyArtistAndAddArtist;
 import com.example.webmusic.controller.artist.out.*;
 import com.example.webmusic.models.album.Album;
 import com.example.webmusic.models.artist.Artist;
-import com.example.webmusic.models.user.User;
 import com.example.webmusic.service.album.AlbumService;
 
-import com.example.webmusic.controller.artist.in.InApi_getSelectedArtist;
 import com.example.webmusic.controller.artist.out.OutApiArtistDetail;
 import com.example.webmusic.controller.artist.out.OutApiGetArtistDescribe;
 import com.example.webmusic.controller.artist.out.OutApi_getRecommendArtist;
 import com.example.webmusic.controller.artist.out.OutApi_getSelectedArtist;
 
-import com.example.webmusic.service.album.AlbumService;
 import com.example.webmusic.service.artist.ArtistService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

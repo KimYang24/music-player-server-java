@@ -13,7 +13,6 @@ import com.example.webmusic.models.user.User;
 import com.example.webmusic.service.log.LogService;
 import com.example.webmusic.utils.oss.OutApi_uploadFile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,9 +20,7 @@ import com.example.webmusic.utils.oss.UploadFile;
 import com.example.webmusic.utils.jwt.JwtUtil;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @Service
@@ -53,6 +50,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             //登陆成功
             if(_user.getPassword().equals(user.getPassword())){
                 String token = JwtUtil.generateToken(_user.getUser_id());
+                System.out.println("token = " + token);
                 outApiLogin.setCode(200);
                 outApiLogin.setToken(token);
                 outApiLogin.setUserId(_user.getUser_id());
@@ -159,8 +157,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     //删除用户信息
     @Override
-    public int deleteUserInfo(int userID) {
-        int code;
+    public long deleteUserInfo(long userID) {
+        int code=200;
         int ok = userMapper.deleteById(userID);
         if (ok == 1)
             code = 200;

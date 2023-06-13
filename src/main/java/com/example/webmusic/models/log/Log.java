@@ -4,6 +4,7 @@ package com.example.webmusic.models.log;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,7 +14,6 @@ import lombok.Data;
 public class Log {
     @TableId(type = IdType.AUTO)
     private long log_id;
-
     private Long song_id;
     /**
      * 歌曲名

@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OutApiGetPageAlbumByArtist {//用户端：分页获取歌手专辑
-    private List<Album> data;
-    private int code;
-    private String pageTotal;
+    private List<Album> albums;
+    private long code;
+    private long pageTotal;
 }

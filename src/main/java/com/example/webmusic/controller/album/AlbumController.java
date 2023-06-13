@@ -3,6 +3,7 @@ package com.example.webmusic.controller.album;
 import com.example.webmusic.controller.album.out.OutApiGetRecommendAlbum;
 import com.example.webmusic.controller.user.out.User.OutApi_addUserInfo;
 import com.example.webmusic.controller.user.out.User.OutApi_getAllUserInfo;
+import com.example.webmusic.frontend_model.AlbumFront;
 import com.example.webmusic.models.album.Album;
 import com.example.webmusic.models.user.User;
 import com.example.webmusic.service.album.AlbumService;
@@ -72,7 +73,7 @@ public class AlbumController {
 
     //添加专辑
     @PostMapping(value = "/admin/addAlbum")
-    public OutApiAddAlbum addAlbum(@RequestBody Album album) {
+    public OutApiAddAlbum addAlbum(@RequestBody AlbumFront album) {
         OutApiAddAlbum outApiAddAlbum=new OutApiAddAlbum();
         albumService.addAlbum(album, outApiAddAlbum);
         return outApiAddAlbum;
@@ -88,9 +89,9 @@ public class AlbumController {
 
     //修改专辑信息
     @PostMapping(value = "/admin/modifyAlbum")
-    public OutApiModifyAlbum modifyAlbum(@RequestBody Album album){
+    public OutApiModifyAlbum modifyAlbum(@RequestBody InApiModifyAlbumInfo inApiModifyAlbumInfo){
         OutApiModifyAlbum outApiModifyAlbum=new OutApiModifyAlbum();
-        albumService.modifyAlbumInfo(album,outApiModifyAlbum);
+        albumService.modifyAlbumInfo(inApiModifyAlbumInfo.getData(),outApiModifyAlbum);
         return outApiModifyAlbum;
     }
 }

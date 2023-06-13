@@ -10,11 +10,8 @@ import com.example.webmusic.controller.artist.in.InApi_getSelectedArtist;
 import com.example.webmusic.mapper.artist.ArtistMapper;
 import com.example.webmusic.models.artist.Artist;
 import com.example.webmusic.models.song.Song;
-import com.example.webmusic.models.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,9 +27,9 @@ public class ArtistServiceImpl extends ServiceImpl<ArtistMapper, Artist> impleme
         QueryWrapper<Artist> qw = new QueryWrapper<>();
         if(!Objects.equals(in.getFirstLetter(), "0"))
             qw.eq("first_letter",in.getFirstLetter());
-        if(in.getLocation() != 0)
-            qw.eq("gender",in.getGender());
         if(in.getGender() != 0)
+            qw.eq("gender",in.getGender());
+        if(in.getLocation() != 0)
             qw.eq("location",in.getLocation());
         Page<Artist> page = new Page<>(in.getCurrentPage(),in.getPageSize());
         IPage<Artist> artistpage = artistMapper.selectPage(page,qw);
@@ -52,6 +49,7 @@ public class ArtistServiceImpl extends ServiceImpl<ArtistMapper, Artist> impleme
         out.setArtists(artists);
     }
 
+
     @Override
     public void artistDetail(long artistId, OutApiArtistDetail outApiArtistDetail){
         Artist artist=artistMapper.selectById(artistId);//选一个,选列表用selectList
@@ -70,7 +68,10 @@ public class ArtistServiceImpl extends ServiceImpl<ArtistMapper, Artist> impleme
         }
         else {
             outApiGetArtistDescribe.setCode(200);
-            outApiGetArtistDescribe.setProfile(artists.getProfile());
+            String profile = artists.getProfile();
+            OutApiGetArtistDescribe.Describe describe = new OutApiGetArtistDescribe.Describe();
+            describe.setProfile(profile);
+            outApiGetArtistDescribe.setDescribe(describe);
         }
     }
 
@@ -106,7 +107,7 @@ public class ArtistServiceImpl extends ServiceImpl<ArtistMapper, Artist> impleme
             return;
         }
         int totals = artistMapper.selectCount(null);
-        int totalPages = totals % 10 == 0 ? totals / 10 : totals / 10 + 1;
+        int totalPages = totals % 5 == 0 ? totals / 5 : totals / 5 + 1;
         IPage<Artist> page = new Page<>(totalPages, 10);
         List<Artist> artistlist = artistMapper.selectPage(page, null).getRecords();
         out.setData(artistlist);

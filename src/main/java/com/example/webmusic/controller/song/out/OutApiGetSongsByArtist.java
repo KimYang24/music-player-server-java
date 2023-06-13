@@ -17,5 +17,5 @@ public class OutApiGetSongsByArtist {
      * 有多少页数据
      */
     private long pageTotal;
-    private List<Song> data;
+    private List<Song> songs;
 }

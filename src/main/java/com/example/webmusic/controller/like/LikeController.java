@@ -52,7 +52,9 @@ public class LikeController {
             }
             if(like.getType() == 3) {
                Album album = albumService.getById(like.getAlbum_id());
-                albums.add(album);
+               if (album!=null){
+                   albums.add(album);
+               }
             }
             if(like.getType() == 4) {
                 PlayList playList = playListService.getById(like.getPlaylist_id());

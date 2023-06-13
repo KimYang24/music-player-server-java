@@ -15,12 +15,12 @@ public class SongFront {
      * 歌曲专辑名
      */
     private String album;
-    private long albumId;
+    private Long albumId;
     /**
      * 歌手名称
      */
     private String artist;
-    private long artistId;
+    private Long artistId;
     /**
      * 歌曲秒数时长
      */
@@ -43,7 +43,7 @@ public class SongFront {
      * 发行时间
      */
     private String publishTime;
-    private long songId;
+    private Long songId;
     private String type;
     private String url;
 }

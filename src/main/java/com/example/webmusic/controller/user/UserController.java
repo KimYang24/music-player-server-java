@@ -74,8 +74,8 @@ public class UserController {
 
     //删除用户信息
     @GetMapping("/User/deleteInfo")
-    public Map<String,Object> deleteUser(@RequestParam(value = "userId") int userID) {
-        int code = userService.deleteUserInfo(userID);
+    public Map<String,Object> deleteUser(@RequestParam(value = "user_id") int userID) {
+        long code = userService.deleteUserInfo(userID);
         Map<String,Object> m = new HashMap<>();
         m.put("code",code);
         return m;

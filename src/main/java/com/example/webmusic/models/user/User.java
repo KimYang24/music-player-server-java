@@ -33,7 +33,7 @@ public class User {
     private String password;
     private String phone;
     private String username;
-    @JsonProperty("pic_url")
+    @JsonProperty("picUrl")
     @TableField("pic_url")
     private String pic_url;
 }

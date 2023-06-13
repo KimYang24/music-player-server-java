@@ -133,18 +133,21 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
 
     @Override
     public void getSongListByArtist(long artistId,String order,long currentPage,long pageSize,OutApiGetSongsByArtist outApiGetSongsByArtist){
+
         QueryWrapper<Song> qw = new QueryWrapper<>();
-        qw.like("artist_id",artistId);
-        List<Song> songList = songMapper.selectList(qw);
-        int total = songList.size();
-        long totalPages = (total + pageSize - 1) / pageSize;
-        if(total ==0){
-            outApiGetSongsByArtist.setCode(200);
-        }
-        else{
+        qw.eq("artist_id",artistId);
+        Page<Song> page = new Page<>(currentPage,pageSize);
+        // 执行分页查询，使用 IPage<User> 接收分页结果
+        IPage<Song> songPage = songMapper.selectPage(page, qw);
+        List<Song> songList = songPage.getRecords();
+        long totalPage = songPage.getPages();
+        long totals = songPage.getTotal();
+        if (totals == 0) {
             outApiGetSongsByArtist.setCode(300);
-            outApiGetSongsByArtist.setPageTotal(totalPages);
-            outApiGetSongsByArtist.setData(songList);
+        } else {
+            outApiGetSongsByArtist.setCode(200);
+            outApiGetSongsByArtist.setPageTotal(totalPage);
+            outApiGetSongsByArtist.setSongs(songList);
         }
     }
 
@@ -217,7 +220,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         updateById(song);
 
         //返回数据
-        Page<Song> page = new Page<>(1, 10); // 从第一页开始查询
+        Page<Song> page = new Page<>(1, 5); // 从第一页开始查询
         IPage<Song> resultPage = songMapper.selectPage(page,null);
         List<Song> records = resultPage.getRecords();
         long pageTotal = resultPage.getPages();
@@ -225,14 +228,15 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
         long sid = song.getSong_id();
         List<Song> data=new ArrayList<>();
         int i=0;
-        for (;i<10;i++){
+        for (;i<5;i++){
             if (getById(sid)!=null){
                 data.add(getById(sid));
             }
             sid--;
         }
+        List<Song> l = list();
         outApiAddSong.setCode(200);
-        outApiAddSong.setTotals(pageTotal);
+        outApiAddSong.setTotals(l.size());
         outApiAddSong.setCurrentPage(pageTotal);
         outApiAddSong.setData(data);
     }
@@ -285,6 +289,7 @@ public class SongServiceImpl extends ServiceImpl<SongMapper, Song> implements So
             // 数据库中不存在符合条件的记录，创建新的记录
             Artist newArtist = Artist.builder()
                     .name(columnValue)
+                    .album_size((long)0)
                     .song_size((long)1)
                     .build();
             // 插入新的记录

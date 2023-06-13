@@ -168,21 +168,24 @@ public class SearchServiceImpl implements SearchService{
         for (Album album : albums) {
             SwiperFront targetdata = new SwiperFront();
             targetdata.setTypeTitle(album.getName());
-            targetdata.setTargetType("2");
+            targetdata.setTargetType(2);
+            targetdata.setPicUrl(album.getPic_url());
             targetdata.setTargetId(album.getAlbum_id());
             swiperFronts.add(targetdata);
         }
         for (Artist artist : artists) {
             SwiperFront targetdata = new SwiperFront();
             targetdata.setTypeTitle(artist.getName());
-            targetdata.setTargetType("3");
+            targetdata.setTargetType(3);
+            targetdata.setPicUrl(artist.getPic_url());
             targetdata.setTargetId(artist.getArtist_id());
             swiperFronts.add(targetdata);
         }
         for (Song song : songs) {
             SwiperFront targetdata = new SwiperFront();
             targetdata.setTypeTitle(song.getName());
-            targetdata.setTargetType("1");
+            targetdata.setTargetType(1);
+            targetdata.setPicUrl(song.getPic_url());
             targetdata.setTargetId(song.getSong_id());
             swiperFronts.add(targetdata);
         }

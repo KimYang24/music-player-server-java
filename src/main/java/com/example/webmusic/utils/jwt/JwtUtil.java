@@ -37,6 +37,7 @@ public class JwtUtil {
 //验证token
     public  static Claims validateToken(String token) {
         System.out.println("进入验证函数");
+        System.out.println("token parser = " + token);
         return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
     }
 }
