@@ -83,9 +83,9 @@ public class UserController {
 
     //上传用户照片
     @PostMapping("/User/uploadPic")
-    public Map<String,Object> uploadUserPic(@RequestParam(value = "file") MultipartFile file,@RequestAttribute(value = "ID") int userID) {
+    public Map<String,Object> uploadUserPic(@RequestParam(value = "file") MultipartFile file,@RequestParam(value = "userId") String userID) {
         System.out.println("进入controller成功,用户ID："+ userID);
-        int code = userService.updateUserPic(userID, file);
+        int code = userService.updateUserPic(Integer.parseInt(userID), file);
         Map<String,Object> m = new HashMap<>();
         m.put("code",code);
         return m;
