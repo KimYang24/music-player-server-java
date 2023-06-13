@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.webmusic.controller.user.in.User.*;
 import com.example.webmusic.controller.user.out.User.*;
 import com.example.webmusic.models.user.User;
+import com.example.webmusic.utils.oss.OutApi_uploadFile;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface UserService extends IService<User> {
@@ -15,7 +16,7 @@ public interface UserService extends IService<User> {
     void addUserInfo(User user,OutApi_addUserInfo out);
     int modifyUserInfo(User user);
     long deleteUserInfo(long userID);
-    int updateUserPic(int userID, MultipartFile file);
+    void updateUserPic(int userID, MultipartFile file, OutApi_uploadFile out);
     void getUserProfile(long userId,OutApiGetUserProfile outApiGetUserProfile);
     void getAUser(long index,OutApi_getAUser out);
 

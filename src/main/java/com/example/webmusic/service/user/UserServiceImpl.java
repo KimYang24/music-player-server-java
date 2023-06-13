@@ -169,14 +169,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     //上传用户头像
     @Override
-    public int updateUserPic(int userID, MultipartFile file) {
-        OutApi_uploadFile out = new OutApi_uploadFile();
+    public void updateUserPic(int userID, MultipartFile file, OutApi_uploadFile out) {
         System.out.println("进入service成功");
-        int code = 200;
         if(!Objects.requireNonNull(file.getContentType()).contains("image/")){
             System.out.println("文件非图片格式！");
-            code = 300;
-            return code;
+            return;
         }
         try {
             UploadFile.uploadFile(userID, file, 1,out);
@@ -185,10 +182,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         if(out.getCode() == 200){
             UpdateWrapper<User> uw = new UpdateWrapper<>();
-            uw.eq("user_id", userID).set("pic_url", out.getUrl());
+            uw.eq("user_id", userID).set("pic_url", out.getPicUrl());
             userMapper.update(null,uw);
         }
-        return out.getCode();
     }
 
     @Override
