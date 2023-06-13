@@ -26,10 +26,15 @@ public class JWTInterceptor implements HandlerInterceptor {
         String authHeader = request.getHeader("Authorization");
         System.out.println("authHeader = " + authHeader);
         if (authHeader != null) {
-            System.out.println("截取token成功");
+            String token = authHeader;
+            if(authHeader.startsWith("Bearer ")) {
+                token = authHeader.substring(7);
+                System.out.println("含有Bearer字段，截取token成功！");
+            }
+            System.out.println("获取token成功");
 
             try {
-                Claims claims = JwtUtil.validateToken(authHeader);
+                Claims claims = JwtUtil.validateToken(token);
                 if (claims != null) {
                     System.out.println("claims非空");
                     // 将用户信息存入请求中，方便后续的操作

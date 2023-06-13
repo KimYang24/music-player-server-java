@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OutApi_uploadFile {
     int code;
-    String url;
+    String picUrl;
 }

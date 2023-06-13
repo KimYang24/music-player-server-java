@@ -46,8 +46,8 @@ public class UploadFile {
         PutObjectResult putObjectResult = client.putObject(putObjectRequest);
         System.out.println(putObjectResult.getETag());
         client.shutdown();
-        out.setUrl("https://web-music-player.oss-cn-guangzhou.aliyuncs.com/" + objectname);
-        System.out.println(out.getUrl());
+        out.setPicUrl("https://web-music-player.oss-cn-guangzhou.aliyuncs.com/" + objectname);
+        System.out.println(out.getPicUrl());
         out.setCode(200);
     }
 }

@@ -5,6 +5,7 @@ import com.example.webmusic.controller.user.in.User.*;
 import com.example.webmusic.controller.user.out.User.*;
 import com.example.webmusic.models.user.User;
 import com.example.webmusic.service.user.UserService;
+import com.example.webmusic.utils.oss.OutApi_uploadFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -81,14 +82,24 @@ public class UserController {
         return m;
     }
 
-    //上传用户照片
+    //管理员上传用户照片
     @PostMapping("/User/uploadPic")
-    public Map<String,Object> uploadUserPic(@RequestParam(value = "file") MultipartFile file,@RequestParam(value = "userId") String userID) {
+    public OutApi_uploadFile adminUploadUserPic(@RequestParam(value = "file") MultipartFile file,@RequestParam(value = "userId") String userID) {
         System.out.println("进入controller成功,用户ID："+ userID);
-        int code = userService.updateUserPic(Integer.parseInt(userID), file);
+        OutApi_uploadFile out = new OutApi_uploadFile();
+        userService.updateUserPic(Integer.parseInt(userID), file,out);
         Map<String,Object> m = new HashMap<>();
-        m.put("code",code);
-        return m;
+        return out;
+    }
+
+    //用户自己上传照片
+    @PostMapping("/user/profile/edit")
+    public OutApi_uploadFile userUploadUserPic(@RequestParam("file") MultipartFile file,@RequestAttribute("ID") int userID) {
+        System.out.println("进入controller成功,用户ID："+ userID);
+        OutApi_uploadFile out = new OutApi_uploadFile();
+        userService.updateUserPic(userID, file,out);
+        Map<String,Object> m = new HashMap<>();
+        return out;
     }
 
     //获取用户个人信息（用户端）
