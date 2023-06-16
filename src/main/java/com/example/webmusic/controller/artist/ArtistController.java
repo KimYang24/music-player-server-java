@@ -28,7 +28,6 @@ public class ArtistController {
 
     @Autowired
     private AlbumService albumService;
-    // TODO 不要没测试过就推上来!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //获取歌手详情页
     @GetMapping(value = "/detail/artist")
     public OutApiArtistDetail artistDetail(@RequestParam(value = "artistId") long artistId){
@@ -99,6 +98,7 @@ public class ArtistController {
     @PostMapping("/admin/modifyArtist")
     public Map<String,Object> modifyArtist(@RequestBody InApi_modifyArtistAndAddArtist in) {
         Artist artist = in.getData();
+//        System.out.println("artist.getAlbum_size() = " + artist.getAlbum_size());
         int code = artistService.modifyArtist(artist);
         Map<String,Object> m = new HashMap<>();
         m.put("code",code);
