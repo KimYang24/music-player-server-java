@@ -1,0 +1,24 @@
+/* 自定义基本样式 */
+
+//全局el组件样式
+.el-tabs__nav-wrap::after {
+  height: 0 !important;
+}
+
+//标签组件外边距
+.el-tabs__header {
+  @apply m-0;
+}
+
+//消息弹出框
+.el-message-box {
+  .el-message-box__btns {
+    .el-button {
+      @apply dark:bg-zinc-800 border-none;
+    }
+
+    .el-button--primary {
+      @apply dark:bg-green-600 hover:text-emerald-200 cursor-pointer;
+    }
+  }
+}

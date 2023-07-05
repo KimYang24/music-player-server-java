@@ -1,0 +1,16 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "mock/*.*", "auto-imports.d.ts"],
+  "exclude": ["src/**/__tests__/*"],
+  "compilerOptions": {
+    // 解决el-message无法引入的问题
+    "moduleResolution": "node",
+    "types": ["element-plus/global"],
+
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}

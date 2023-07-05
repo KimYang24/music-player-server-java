@@ -1,0 +1,75 @@
+/* 一些自定义样式 */
+
+//背景基本样式
+.bg-main {
+  //背景色
+  @apply bg-gray-50;
+  @apply dark:bg-neutral-950;
+}
+
+//悬浮背景基本样式
+.hover-bg-main {
+  @apply hover:bg-gray-100;
+  @apply dark:hover:bg-slate-700;
+}
+
+//暗色背景
+.bg-dc {
+  @apply bg-gray-100;
+  @apply dark:bg-stone-800;
+}
+
+.bg-view {
+  @apply bg-white;
+  @apply dark:bg-[#1e1e1f];
+}
+
+//悬浮背景样式
+.hover-bg-view {
+  @apply hover:bg-stone-100;
+  @apply dark:hover:bg-stone-800;
+}
+
+.bg-active {
+  @apply bg-emerald-400 text-white;
+}
+.text-active {
+  @apply text-emerald-400;
+}
+
+//文字主样式
+.text-main {
+  @apply text-slate-800;
+  @apply dark:text-slate-200;
+}
+
+//文本悬停样式
+.hover-text {
+  //文本颜色，鼠标可点击
+  @apply hover:text-emerald-400 cursor-pointer;
+}
+
+//暗色文本
+.text-dc {
+  @apply text-slate-400;
+  @apply dark:text-slate-400;
+}
+
+//按钮
+.button {
+  @apply flex bg-[#e6e6e6] rounded justify-center items-center h-8 text-sm transition-all cursor-pointer;
+  @apply dark:bg-[#303031] dark:text-white;
+  @apply hover:text-emerald-500;
+}
+
+//边框轮廓button
+.button-outline {
+  @apply flex rounded-full justify-center items-center h-8 text-sm transition-all border;
+  @apply hover:border-emerald-400 hover:text-emerald-400;
+  @apply dark:hover:border-emerald-300 dark:hover:text-emerald-300;
+}
+
+//小按钮
+.button-sm {
+  @apply h-7 text-xs;
+}
